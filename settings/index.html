@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Settings — Snèh AI</title>
+  <meta name="description" content="Manage your Snèh AI profile, theme preferences, privacy controls, data retention settings, and account authentication." />
+  <link rel="canonical" href="https://snehaidbc.netlify.app/settings/" />
+  <meta name="author" content="DBC Technologies" />
+
+  <!-- Reuse Existing Site CSS Files -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../modal.css" />
+  <link rel="stylesheet" href="../css/profile.css" />
+
+  <!-- Google Identity Services & Lucide Icons -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+ <style>
+  body {
+    background: var(--app-bg, #FAFAFA);
+    color: var(--text-primary, #1c1c1e);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+  .settings-page-wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+  .back-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary, #0B57CF);
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    transition: opacity 0.2s ease;
+  }
+  .back-nav:hover { opacity: 0.8; }
+
+  .settings-page-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+  .settings-page-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0;
+  }
+
+  /* Guest Banner */
+  .guest-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--primary, #0B57CF);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .guest-card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .guest-card-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  footer {
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--input-border-color, rgba(0,0,0,0.1));
+    font-size: 0.82rem;
+    color: var(--text-tertiary, #8e8e93);
+    text-align: center;
+  }
+
+  /* ─── Sticky Header Styles ─── */
+  .sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--app-bg, #FAFAFA);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-bottom: 1px solid transparent;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transform: translateY(-120%);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    will-change: transform, opacity;
+  }
+
+  .sticky-header.visible {
+    transform: translateY(0);
+    opacity: 1;
+    border-bottom-color: var(--input-border-color, rgba(0, 0, 0, 0.08));
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  .sticky-header .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary, #0B57CF);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+  }
+  .sticky-header .back-link:hover {
+    opacity: 0.8;
+  }
+  .sticky-header .back-link i {
+    font-size: 1rem;
+  }
+
+  .sticky-header .header-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .sticky-header .header-spacer {
+    flex: 1;
+  }
+
+  .sticky-header .mini-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid var(--input-border-color, rgba(0, 0, 0, 0.08));
+    flex-shrink: 0;
+    background: var(--bg-secondary);
+  }
+
+  /* (Existing styles below) */
+  /* ─── Resources Modal Items CSS ─── */
+  .resources-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm, 10px);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: background 0.18s ease, border-color 0.18s ease;
+    border: 1px solid transparent;
+  }
+  .resources-item:hover {
+    background: rgba(11, 87, 207, 0.06);
+    border-color: var(--input-border-color, rgba(0,0,0,0.08));
+  }
+  [data-theme="dark"] .resources-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .res-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--primary, #0B57CF);
+    flex-shrink: 0;
+  }
+  .res-text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+  .res-title {
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .res-sub {
+    font-size: 0.73rem;
+    color: var(--text-tertiary, #8e8e93);
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .res-arrow {
+    width: 16px;
+    height: 16px;
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+  }
+  
+</style>
+</head>
+<body>
+
+  <!-- ===== STICKY HEADER (appears on scroll) ===== -->
+  <header class="sticky-header" id="stickyHeader">
+    <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Settings</a>
+    <span class="header-title"></span>
+    <span class="header-spacer"></span>
+    <img class="mini-avatar" id="sticky-avatar" src="https://lh3.googleusercontent.com/a/default-user" alt="avatar" referrerpolicy="no-referrer">
+  </header>
+
+  <div class="settings-page-wrapper">
+    <a href="/" class="back-nav"><i class="fas fa-arrow-left"></i> Settings</a>
+
+    <!-- Guest Sign-In Banner (Shown if not logged in) -->
+    <div id="guest-prompt-card" class="guest-card" style="display: none;">
+      <div class="guest-card-title">
+        <i class="fab fa-google" style="color: var(--primary);"></i>
+        <span>Sign in with Google Account</span>
+      </div>
+      <p class="guest-card-desc">Log in to sync your profile settings across devices and manage your secure account session.</p>
+      <div id="google-signin-btn-box" style="margin-top: 6px;"></div>
+    </div>
+
+    <!-- Profile Hero directly on the page -->
+    <div class="settings-profile-hero">
+      <div class="hero-avatar-wrapper">
+        <img id="full-avatar" class="hero-avatar" src="https://lh3.googleusercontent.com/a/default-user" alt="Avatar" referrerpolicy="no-referrer">
+      </div>
+      <div class="hero-info">
+        <h3 id="full-name" class="hero-name">Guest User</h3>
+        <span id="hero-session-badge" class="hero-badge"><i class="fas fa-user-clock"></i> Guest Session</span>
+      </div>
+    </div>
+
+    <!-- Setting Cards directly on the page -->
+    <div class="settings-sections">
+      
+      <!-- Card 1: Identity -->
+      <div class="settings-card">
+        <div class="card-header-label">Profile & Identity</div>
+        
+        <div class="settings-row">
+          <div class="row-left">
+            <i data-lucide="user" class="row-icon"></i>
+            <span class="row-label">Display Name</span>
+          </div>
+          <span id="full-display-name" class="row-val">Guest</span>
+        </div>
+
+        <div class="settings-row">
+          <div class="row-left">
+            <i data-lucide="mail" class="row-icon"></i>
+            <span class="row-label">Email Address</span>
+          </div>
+          <span id="full-email" class="row-val">Not signed in</span>
+        </div>
+
+        <div class="settings-row">
+          <div class="row-left">
+            <i data-lucide="shield" class="row-icon"></i>
+            <span class="row-label">Auth Provider</span>
+          </div>
+          <span id="full-provider-badge" class="row-val">—</span>
+        </div>
+
+        <div class="settings-row">
+          <div class="row-left">
+            <i data-lucide="hash" class="row-icon"></i>
+            <span class="row-label">User ID</span>
+          </div>
+          <span id="full-user-id" class="row-val val-code">GUEST_LOCAL</span>
+        </div>
+
+        <div class="settings-row clickable-row" id="dob-row-trigger">
+          <div class="row-left">
+            <i data-lucide="calendar" class="row-icon"></i>
+            <span class="row-label">Date of Birth</span>
+          </div>
+          <div id="dob-container" class="row-right">
+            <span id="dob-display">Not set</span>
+            <i data-lucide="chevron-right" class="chevron-icon"></i>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+
+      <!-- Card 2: App Customization -->
+      <div class="settings-card">
+        <div class="card-header-label">App Settings</div>
+        
+        <div class="settings-row clickable-row" id="theme-row-trigger">
+          <div class="row-left">
+            <i data-lucide="palette" class="row-icon"></i>
+            <span class="row-label">Appearance</span>
+          </div>
+          <div class="row-right">
+            <span id="full-theme-mode" class="row-val">Dark Mode</span>
+            <i data-lucide="chevron-right" class="chevron-icon"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Data Controls -->
+      <div class="settings-card">
+        <div class="card-header-label">Data Controls</div>
+        
+        <div class="settings-row">
+          <div class="row-left">
+            <i data-lucide="activity" class="row-icon"></i>
+            <div class="row-label-group">
+              <span class="row-label">Improve the model for everyone</span>
+              <span class="row-sublabel">Allow chat data securely to improve response metrics.</span>
+            </div>
+          </div>
+          <label class="switch-toggle">
+            <input type="checkbox" id="improve-model-toggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="settings-row clickable-row row-danger" id="delete-chats-trigger">
+          <div class="row-left">
+            <i data-lucide="trash-2" class="row-icon danger-icon"></i>
+            <span class="row-label danger-text">Delete all conversations</span>
+          </div>
+          <i data-lucide="chevron-right" class="chevron-icon"></i>
+        </div>
+      </div>
+
+      <!-- Card 4: Legal & Policies -->
+      <div class="settings-card">
+        <div class="card-header-label">Service Agreement</div>
+        
+        <a href="/about/" class="settings-row clickable-row" style="text-decoration: none;">
+          <div class="row-left">
+            <i data-lucide="file-text" class="row-icon"></i>
+            <span class="row-label">Terms of Use</span>
+          </div>
+          <i data-lucide="chevron-right" class="chevron-icon"></i>
+        </a>
+
+        <a href="/privacy/" class="settings-row clickable-row" style="text-decoration: none;">
+          <div class="row-left">
+            <i data-lucide="lock" class="row-icon"></i>
+            <span class="row-label">Privacy Policy</span>
+          </div>
+          <i data-lucide="chevron-right" class="chevron-icon"></i>
+        </a>
+      </div>
+      
+     <!-- Card: Resources & Knowledge Hub -->
+<div class="settings-card">
+  <div class="card-header-label">Resources & Information</div>
+
+  <a href="/resources/index.html" class="settings-row clickable-row" style="text-decoration: none;">
+    <div class="row-left">
+      <i data-lucide="book-open" class="row-icon" style="color: var(--primary, #0B57CF);"></i>
+      <div class="row-label-group">
+        <span class="row-label">Resources & Guides Hub</span>
+        <span class="row-sublabel">Docs, Features, Privacy, Security, FAQ, VS ChatGPT & More</span>
+      </div>
+    </div>
+    <i data-lucide="chevron-right" class="chevron-icon"></i>
+  </a>
+</div>
+      
+
+      <!-- Card 5: About -->
+      <div class="settings-card">
+        <div class="card-header-label">About</div>
+        
+        <div class="settings-row clickable-row" id="check-updates-trigger">
+          <div class="row-left">
+            <i data-lucide="info" class="row-icon"></i>
+            <span class="row-label">Check for updates</span>
+          </div>
+          <div class="row-right">
+            <span class="row-val update-val-tag">v5.2.5</span>
+            <i data-lucide="chevron-right" class="chevron-icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons directly on the page -->
+    <div class="settings-actions">
+      <button id="full-signout-btn" class="signout-action-btn" style="display: none;">
+        <i class="fas fa-sign-out-alt"></i> Log Out Account
+      </button>
+    </div>
+
+    <footer>
+      <p>© 2026 DBC Technologies (DBC Technologies Narwana). All rights reserved.</p>
+    </footer>
+  </div>
+    
+
+  <!-- Dialog 1: Appearance Mode Selector -->
+  <div class="sub-dialog-overlay" id="theme-dialog-overlay" style="display: none;">
+    <div class="sub-dialog-box">
+      <div class="sub-dialog-header">
+        <h3>Appearance</h3>
+      </div>
+      <div class="sub-dialog-body">
+        <label class="radio-option">
+          <input type="radio" name="appearance-theme" value="light" id="theme-radio-light">
+          <span class="radio-label">Light Mode</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="appearance-theme" value="dark" id="theme-radio-dark">
+          <span class="radio-label">Dark Mode</span>
+        </label>
+      </div>
+      <div class="sub-dialog-footer">
+        <button class="dialog-cancel-btn" id="theme-dialog-cancel">Cancel</button>
+        <button class="dialog-confirm-btn" id="theme-dialog-confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dialog 2: Date of Birth Picker -->
+  <div class="sub-dialog-overlay" id="dob-dialog-overlay" style="display: none;">
+    <div class="sub-dialog-box">
+      <div class="sub-dialog-header">
+        <h3>Your Date of Birth</h3>
+      </div>
+      <div class="sub-dialog-body">
+        <input type="date" id="dob-input" style="width: 100%; padding: 10px; border-radius: 12px; border: 1px solid var(--input-border-color); background: var(--input-bg1, #fff); color: var(--text-primary); font-size: 1rem;">
+        <p style="font-size: 0.75rem; margin-top: 10px; color: var(--text-secondary);">You must be at least 13 years old to use Snèh AI.</p>
+      </div>
+      <div class="sub-dialog-footer">
+        <button class="dialog-cancel-btn" id="dob-dialog-cancel">Cancel</button>
+        <button class="dialog-confirm-btn" id="dob-dialog-confirm">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dialog 3: Delete Conversations Confirmation -->
+  <div class="sub-dialog-overlay" id="delete-dialog-overlay" style="display: none;">
+    <div class="sub-dialog-box">
+      <div class="sub-dialog-header">
+        <h3>Delete all conversations?</h3>
+      </div>
+      <div class="sub-dialog-body">
+        <p style="font-size: 0.9rem; color: var(--text-primary);">This action cannot be undone. All your chat history will be permanently removed.</p>
+      </div>
+      <div class="sub-dialog-footer">
+        <button class="dialog-cancel-btn" id="delete-dialog-cancel">Cancel</button>
+        <button class="dialog-confirm-btn" id="delete-dialog-confirm">Yes, delete</button>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  <!-- Card: Resources & Knowledge Hub -->
+
+
+  
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+
+      // Theme initialization
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      document.getElementById('full-theme-mode').textContent = savedTheme === 'dark' ? 'Dark Mode' : 'Light Mode';
+
+      // Load user profile from LocalStorage
+      let user = null;
+      try {
+        const raw = localStorage.getItem('sneh_user_profile') || localStorage.getItem('sneh_user');
+        if (raw) user = JSON.parse(raw);
+      } catch(e) {
+        console.warn("Could not parse saved user profile", e);
+      }
+
+      const avatarEl = document.getElementById('full-avatar');
+      const nameEl = document.getElementById('full-name');
+      const dispNameEl = document.getElementById('full-display-name');
+      const emailEl = document.getElementById('full-email');
+      const providerEl = document.getElementById('full-provider-badge');
+      const userIdEl = document.getElementById('full-user-id');
+      const badgeEl = document.getElementById('hero-session-badge');
+      const signoutBtn = document.getElementById('full-signout-btn');
+      const guestCard = document.getElementById('guest-prompt-card');
+      const stickyAvatar = document.getElementById('sticky-avatar');
+
+      if (user && (user.email || user.name)) {
+        if (user.picture || user.avatar) {
+          avatarEl.src = user.picture || user.avatar;
+          if (stickyAvatar) stickyAvatar.src = user.picture || user.avatar;
+        }
+        nameEl.textContent = user.name || "Logged-In User";
+        dispNameEl.textContent = user.given_name || user.name || "User";
+        emailEl.textContent = user.email || "—";
+        providerEl.innerHTML = `<span class="text-bound"><i class="fab fa-google"></i> Google Bound</span>`;
+        userIdEl.textContent = user.sub || user.id || "USR_SECURE";
+        badgeEl.innerHTML = `<i class="fas fa-shield-alt"></i> Secure Session`;
+        signoutBtn.style.display = "flex";
+        guestCard.style.display = "none";
+      } else {
+        nameEl.textContent = "Guest User";
+        dispNameEl.textContent = "Guest";
+        emailEl.textContent = "Not signed in";
+        providerEl.textContent = "—";
+        userIdEl.textContent = "GUEST_LOCAL";
+        badgeEl.innerHTML = `<i class="fas fa-user-clock"></i> Guest Session`;
+        signoutBtn.style.display = "none";
+        guestCard.style.display = "flex";
+
+        initGoogleSignIn();
+      }
+
+      // Load DOB
+      const savedDob = localStorage.getItem('sneh_user_dob');
+      if (savedDob) document.getElementById('dob-display').textContent = savedDob;
+
+      // Model Data Control switch
+      const improveSwitch = document.getElementById('improve-model-toggle');
+      if (improveSwitch) {
+        improveSwitch.checked = localStorage.getItem('sneh_improve_model') === 'true';
+        improveSwitch.addEventListener('change', (e) => {
+          localStorage.setItem('sneh_improve_model', e.target.checked);
+        });
+      }
+
+      // Date of Birth Dialog
+      document.getElementById('dob-row-trigger').addEventListener('click', () => {
+        document.getElementById('dob-dialog-overlay').style.display = 'flex';
+      });
+      document.getElementById('dob-dialog-cancel').addEventListener('click', () => {
+        document.getElementById('dob-dialog-overlay').style.display = 'none';
+      });
+      document.getElementById('dob-dialog-confirm').addEventListener('click', () => {
+        const val = document.getElementById('dob-input').value;
+        if (val) {
+          localStorage.setItem('sneh_user_dob', val);
+          document.getElementById('dob-display').textContent = val;
+        }
+        document.getElementById('dob-dialog-overlay').style.display = 'none';
+      });
+
+      // Appearance Dialog
+      document.getElementById('theme-row-trigger').addEventListener('click', () => {
+        const cur = localStorage.getItem('theme') || 'dark';
+        if (cur === 'dark') document.getElementById('theme-radio-dark').checked = true;
+        else document.getElementById('theme-radio-light').checked = true;
+        document.getElementById('theme-dialog-overlay').style.display = 'flex';
+      });
+      document.getElementById('theme-dialog-cancel').addEventListener('click', () => {
+        document.getElementById('theme-dialog-overlay').style.display = 'none';
+      });
+      document.getElementById('theme-dialog-confirm').addEventListener('click', () => {
+        const isDark = document.getElementById('theme-radio-dark').checked;
+        const newTheme = isDark ? 'dark' : 'light';
+        localStorage.setItem('theme', newTheme);
+        document.documentElement.setAttribute('data-theme', newTheme);
+        document.getElementById('full-theme-mode').textContent = isDark ? 'Dark Mode' : 'Light Mode';
+        document.getElementById('theme-dialog-overlay').style.display = 'none';
+      });
+
+      // Delete Conversations Dialog
+      document.getElementById('delete-chats-trigger').addEventListener('click', () => {
+        document.getElementById('delete-dialog-overlay').style.display = 'flex';
+      });
+      document.getElementById('delete-dialog-cancel').addEventListener('click', () => {
+        document.getElementById('delete-dialog-overlay').style.display = 'none';
+      });
+      document.getElementById('delete-dialog-confirm').addEventListener('click', () => {
+        localStorage.removeItem('sneh_chat_history');
+        localStorage.removeItem('sneh_chats');
+        localStorage.removeItem('chatHistory');
+        document.getElementById('delete-dialog-overlay').style.display = 'none';
+        alert('All stored conversation history has been cleared.');
+      });
+
+      // Platform Version Check
+      document.getElementById('check-updates-trigger').addEventListener('click', () => {
+        alert('Snèh AI is running the latest platform build (v5.2.5).');
+      });
+
+      // Sign Out Handler
+      signoutBtn.addEventListener('click', () => {
+        if (window.google && google.accounts && google.accounts.id) {
+          google.accounts.id.disableAutoSelect();
+        }
+        localStorage.removeItem('sneh_user_profile');
+        localStorage.removeItem('sneh_user');
+        window.location.reload();
+      });
+
+      // ─── Sticky Header Scroll Logic ───
+      const stickyHeader = document.getElementById('stickyHeader');
+      let lastScrollY = window.scrollY;
+
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > 80) {
+          stickyHeader.classList.add('visible');
+        } else {
+          stickyHeader.classList.remove('visible');
+        }
+        lastScrollY = currentScrollY;
+      }, { passive: true });
+    });
+
+    function initGoogleSignIn() {
+      if (typeof google === 'undefined' || !google.accounts) {
+        setTimeout(initGoogleSignIn, 300);
+        return;
+      }
+      google.accounts.id.initialize({
+        client_id: "870634694939-9m3u9hks7vstc998v0tme591b7m4p77d.apps.googleusercontent.com",
+        callback: (response) => {
+          try {
+            const payload = parseJwt(response.credential);
+            localStorage.setItem('sneh_user_profile', JSON.stringify(payload));
+            window.location.reload();
+          } catch(e) {
+            console.error("Failed to parse Google credential", e);
+          }
+        }
+      });
+      google.accounts.id.renderButton(
+        document.getElementById("google-signin-btn-box"),
+        { theme: "outline", size: "medium", shape: "pill" }
+      );
+    }
+
+    function parseJwt(token) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+      return JSON.parse(jsonPayload);
+    }
+  
+  
+  
+  
+  // Resources Overlay Modal Event Handlers
+const resTrigger = document.getElementById('resources-row-trigger');
+const resOverlay = document.getElementById('resources-dialog-overlay');
+const resClose = document.getElementById('resources-dialog-close');
+
+if (resTrigger && resOverlay) {
+  resTrigger.addEventListener('click', () => {
+    resOverlay.style.display = 'flex';
+    if (window.lucide) lucide.createIcons();
+  });
+}
+
+if (resClose && resOverlay) {
+  resClose.addEventListener('click', () => {
+    resOverlay.style.display = 'none';
+  });
+}
+
+if (resOverlay) {
+  resOverlay.addEventListener('click', (e) => {
+    if (e.target === resOverlay) {
+      resOverlay.style.display = 'none';
+    }
+  });
+}
+  
+  
+  
+  </script>
+  
+  
+  
+ 
+  
+</body>
+</html>
