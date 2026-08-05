@@ -1,0 +1,28 @@
+# Snèh AI — DBC Technologies Robots Exclusion File
+# Site Canonical: https://snehaidbc.netlify.app/
+
+User-agent: *
+Allow: /
+
+# Dedicated AI Search & Retrieval Crawlers
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Dedicated Image Indexing
+User-agent: Googlebot-Image
+Allow: /
+
+# XML Sitemap
+Sitemap: https://snehaidbc.netlify.app/sitemap.xml

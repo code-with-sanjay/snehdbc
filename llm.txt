@@ -1,0 +1,22 @@
+# Snèh AI
+
+> Snèh AI (Sneh AI) is a private, web-connected AI assistant developed by DBC Technologies (DBC Technologies Narwana) in collaboration with VIDHI Projects Chandigarh.
+
+## Overview & Architecture
+- **Inference Infrastructure**: Built using high-speed model routing (including Sneh llm 3.3 and Sneh Enigma llm architectures) via optimized inference hardware.
+- **Privacy Architecture**: Designed with privacy-first data routing where user conversations are not stored persistently or used to train public language models.
+- **Web Grounding**: Includes integrated search tools for real-time web verification and source retrieval.
+- **Platform Availability**: Accessible via web browser and installable as a Progressive Web Application (PWA) across mobile and desktop devices.
+
+## Primary Canonical Pages
+- App Interface: https://snehaidbc.netlify.app/
+- Product Features: https://snehaidbc.netlify.app/features/
+- Privacy Architecture: https://snehaidbc.netlify.app/privacy/
+- About Organization: https://snehaidbc.netlify.app/about/
+- Release History: https://snehaidbc.netlify.app/changelog/
+- Snèh AI vs ChatGPT: https://snehaidbc.netlify.app/vs-chatgpt/
+
+## Publisher & Contact
+- **Organization**: DBC Technologies (DBC Technologies Narwana)
+- **Location**: Narwana, District Jind, Haryana, India - 126116
+- **Contact Email**: ask.sanjey@gmail.com

@@ -1,0 +1,84 @@
+<!-- Sidebar Header (Apple-Style Big Bold Brand Title + Back Button Only) -->
+<div class="sidebar-header">
+  <div class="sidebar-brand-title">
+    <span class="brand-name">Snèh AI</span>
+  </div>
+  <button class="close-sidebar" onclick="toggleSidebar()" aria-label="Close Sidebar" title="Close Sidebar">
+    <i data-lucide="chevron-left"></i>
+  </button>
+</div>
+
+<!-- ChatGPT-Style Navigation Items -->
+<div class="sidebar-nav-links">
+  <a href="/features/" class="sidebar-nav-item">
+    <i data-lucide="book-open" class="nav-icon"></i>
+    <span>Library</span>
+  </a>
+ 
+  <!-- Replace the existing Offline AI nav link with this Grok-style capsule -->
+<a href="#" onclick="document.getElementById('btn-offline-setup')?.click(); return false;" class="offline-ai-capsule">
+  <div class="capsule-left">
+    <i data-lucide="zap" class="capsule-icon"></i>
+    <div class="capsule-text">
+      <span class="capsule-title">Offline AI Engine</span>
+      <span class="capsule-subtitle" id="capsule-subtext-dynamic">Local models & zero latency</span>
+    </div>
+  </div>
+  <span class="capsule-action-btn">Enable</span>
+</a>
+  
+  <a href="/features/" class="sidebar-nav-item">
+    <i data-lucide="compass" class="nav-icon"></i>
+    <span>Features & Models</span>
+  </a>
+</div>
+
+<!-- Section Header: Recents -->
+<div class="sidebar-section-title">
+  <span>Recents</span>
+</div>
+
+<!-- History List (Scrollable with Top & Bottom Fade Mask) -->
+<div id="history-list" class="history-list"></div>
+
+<!-- Offline AI Fallback Trigger (Hidden Container) -->
+<div id="offline-actions-row" style="display: none;">
+  <button id="btn-offline-setup"></button>
+</div>
+
+<!-- Ultra Compact Bottom Footer Container -->
+<div class="sidebar-footer-container">
+  <!-- Capsule Row: Google Sign-In / Profile Capsule + Settings Icon -->
+  <div class="sidebar-bottom-bar">
+    <div id="sidebar-user-header" class="sidebar-user-capsule">
+      <button class="sidebar-guest-signin" onclick="if(window.triggerGoogleSignIn){triggerGoogleSignIn();}">
+        <i data-lucide="log-in"></i>
+        <span>Sign in with Google</span>
+      </button>
+    </div>
+
+    <!-- Settings Button -->
+    <a href="/settings/" class="sidebar-settings-btn" title="Settings" aria-label="Settings">
+      <i data-lucide="settings"></i>
+    </a>
+  </div>
+  
+  
+ 
+  
+
+  <!-- Vertically Compact & Centered Brand Info & Legal Links -->
+  <div class="sidebar-footer-links">
+    <div class="footer-mini-grid">
+      <a href="/about/" onclick="openLegalSection('About Us'); return false;">About</a>
+      <span class="dot-sep">•</span>
+      <a href="/privacy/" onclick="openLegalSection('Privacy Policy'); return false;">Privacy</a>
+      <span class="dot-sep">•</span>
+      <a href="/terms/" onclick="openLegalSection('Terms and Conditions'); return false;">Terms</a>
+      <span class="dot-sep">•</span>
+      <a href="#" onclick="showCareersModal(); return false;">Careers</a>
+      <span class="dot-sep">•</span>
+      <span>Snèh AI © 2026 DBC Technologies</span>
+    </div>
+  </div>
+</div>

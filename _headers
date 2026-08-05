@@ -1,0 +1,67 @@
+# ============================================================
+# Snèh AI — Netlify HTTP Security & Cache Configuration
+# Site: https://snehaidbc.netlify.app/
+# ============================================================
+
+# Global Security & OAuth Pop-up Headers
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+
+# PWA Service Worker & Manifest Freshness
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/manifest.json
+  Cache-Control: public, max-age=0, must-revalidate
+
+/llms.txt
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/sitemap.xml
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# HTML Shell & Static Routes
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/features/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/privacy/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/about/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/changelog/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/vs-chatgpt/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/install/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/security/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/faq/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/docs/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Immutable Static Assets
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/icons/*
+  Cache-Control: public, max-age=31536000, immutable

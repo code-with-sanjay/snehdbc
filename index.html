@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content" />
+  <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+
+  <!-- iOS-specific translucent status bar configuration -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Snèh AI">
+
+  <!-- Primary SEO Metadata -->
+  <title>Snèh AI — Private AI Assistant Powered by Sneh-V3 LPU Acceleration | DBC Technologies</title>
+  <meta name="description" content="Sneh AI is a private, web-connected AI assistant by DBC Technologies. Features Sneh-V3 LPU hardware acceleration, live web search, and zero public model training." />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <link rel="canonical" href="https://snehaidbc.netlify.app/" />
+  <meta name="author" content="DBC Technologies" />
+
+  <!-- App Icons & PWA -->
+  <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+  <link rel="mask-icon" href="/icons/icon.svg" color="#000000">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Snèh AI" />
+  <meta property="og:title" content="Snèh AI — Private AI Assistant Powered by Sneh-V3 LPU Acceleration" />
+  <meta property="og:description" content="Fast, private AI chat running on Sneh-V3 LPU inference. Zero model training on private messages, live web search, and instant response engines." />
+  <meta property="og:url" content="https://snehaidbc.netlify.app/" />
+  <meta property="og:image" content="https://snehaidbc.netlify.app/icons/sneh-ai-og.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@Sanjay_narwana" />
+  <meta name="twitter:creator" content="@Sanjay_narwana" />
+  <meta name="twitter:title" content="Snèh AI — Sneh-V3 LPU Accelerated Private AI" />
+  <meta name="twitter:description" content="Fast, private AI assistant built by DBC Technologies. Zero training on user data." />
+  <meta name="twitter:image" content="https://snehaidbc.netlify.app/icons/sneh-ai-og.webp" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Sign-In -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- Markdown + Safe HTML + Code Highlighting -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@latest/dist/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.11.0/lib/core.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.11.0/styles/github-dark.min.css">
+<!-- Clarity tracking code for https://snehaidbc.netlify.app/ -->
+<script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xrhsqn87bn");
+</script>
+  <!-- Modular CSS -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/table.css">
+  <link rel="stylesheet" href="css/input.css">
+  <link rel="stylesheet" href="css/markdown.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/utilities.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <!-- Modal / Sidebar / C2 styles -->
+  <link rel="stylesheet" href="modal.css">
+  <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="sidebar.css">
+  <link rel="stylesheet" href="c2.css">
+
+  <!-- Unified JSON-LD Connected Entity Graph -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://snehaidbc.netlify.app/#organization",
+        "name": "DBC Technologies",
+        "alternateName": ["DBC Technologies", "DBC Technologies Narwana"],
+        "url": "https://snehaidbc.netlify.app/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://snehaidbc.netlify.app/icons/icon-512x512.png"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Narwana",
+          "addressRegion": "Haryana",
+          "postalCode": "126116",
+          "addressCountry": "IN"
+        },
+        "sameAs": [
+          "https://x.com/Sanjay_narwana",
+          "https://t.me/DBCcontactus",
+          "https://instagram.com/sanjay.narwana"
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://snehaidbc.netlify.app/#software",
+        "name": "Snèh AI",
+        "alternateName": ["Sneh AI", "SnehAI", "Sneh AI Online"],
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "All (Web, Android, iOS, Windows, macOS)",
+        "softwareVersion": "5.2.5",
+        "description": "Private, web-connected AI assistant running on Sneh-V3 LPU inference hardware with zero user message retention.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": { "@id": "https://snehaidbc.netlify.app/#organization" }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://snehaidbc.netlify.app/#website",
+        "url": "https://snehaidbc.netlify.app/",
+        "name": "Snèh AI",
+        "publisher": { "@id": "https://snehaidbc.netlify.app/#organization" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://snehaidbc.netlify.app/#webpage",
+        "url": "https://snehaidbc.netlify.app/",
+        "name": "Snèh AI — Private AI Assistant Powered by Sneh-V3 LPU Acceleration",
+        "isPartOf": { "@id": "https://snehaidbc.netlify.app/#website" },
+        "about": { "@id": "https://snehaidbc.netlify.app/#software" }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://snehaidbc.netlify.app/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Snèh AI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Snèh AI (Sneh AI) is a fast, private, and secure AI companion developed by DBC Technologies in collaboration with VIDHI Projects. It provides web-grounded chat, coding, translation, and productivity assistance."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are conversations saved or used to train AI models?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Snèh AI operates on a Zero-Retention Architecture. Messages are held in volatile RAM during inference generation and strictly excluded from public AI model training."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How fast is Snèh AI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Snèh AI utilizes Sneh-V3® LPU™ (Language Processing Unit) hardware acceleration, delivering sub-100ms response streaming latency."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="app">   
+    <header class="header" role="banner">
+      <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Open Navigation Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round">
+          <line x1="3.5" y1="6" x2="10" y2="6"></line>
+          <line x1="4" y1="12" x2="12" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+          <circle cx="18" cy="6" r="5.2" fill="#0B57CF" stroke="none"></circle>
+        </svg>
+      </button>
+      <div class="header-brand">
+        <div class="logo-text"></div>
+      </div>
+      <div class="header-actions">
+        <div class="header-actions-group">
+          <button class="theme-toggle-header" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle Theme">
+            <i data-lucide="moon"></i>
+          </button>
+          <button class="new-chat-btn" onclick="createNewChat()" title="New chat" aria-label="Start New Chat">
+            <i data-lucide="edit"></i>
+          </button>
+        </div>
+        <button class="incognito-btn" onclick="toggleIncognito()" title="Private, unsaved chat" aria-label="Private Chat Mode">
+          <i data-lucide="eye"></i>
+        </button>
+      </div>
+    </header>
+
+    <div id="sidebar" class="sidebar"></div>
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <div id="profile-modal" class="modal"></div>
+    <div id="legal-modal" class="modal"></div>
+    <div id="careers-modal" class="modal"></div>
+    <div id="contact-modal" class="modal"></div>
+    <div id="c2" class="modal"></div>   
+
+    <main class="panel" role="main">
+      <!-- Visually Hidden Pre-rendered Content for Crawler DOM Parse & GEO Citation Grounding -->
+      <section class="seo-crawler-content" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">
+        <h1>Snèh AI (Sneh AI) — Private AI Assistant</h1>
+        <p>Snèh AI is a high-speed, web-grounded AI companion developed by <strong>DBC Technologies</strong> (DBC Technologies Narwana) in partnership with <strong>VIDHI Projects Chandigarh</strong>.</p>
+        
+        <h2>Technical Features & Proof Points</h2>
+        <ul>
+          <li><strong>Sneh-V3® LPU™ Hardware Acceleration:</strong> Ultra-low latency response streaming using dedicated Language Processing Unit infrastructure.</li>
+          <li><strong>Zero-Retention Message Privacy:</strong> Messages are held in RAM during generation and never stored or used to train public LLMs.</li>
+          <li><strong>Live Web Grounding:</strong> Real-time internet search capability for up-to-date factual queries and citation generation.</li>
+          <li><strong>PWA & Offline Installation:</strong> Installable on Android, iOS, Windows, and macOS as an offline-capable Progressive Web Application.</li>
+        </ul>
+
+        <h2>Quick Navigation Links</h2>
+        <nav aria-label="SEO Sitemap Links">
+          <a href="/features/">Product Features</a> |
+          <a href="/privacy/">Privacy Architecture</a> |
+          <a href="/about/">About DBC Technologies</a> |
+          <a href="/changelog/">Release Notes & Updates</a> |
+          <a href="/vs-chatgpt/">Snèh AI vs ChatGPT</a>
+        </nav>
+      </section>
+
+      <div id="chat-container" class="chat-container"></div>
+
+      <!-- Pending incognito banner -->
+      <div id="incognito-pending-banner" class="incognito-banner" style="display: none;">
+        Temporary Chat mode: this chat will not be saved to history
+      </div>
+
+      <!-- Bottom bar container -->
+      <div class="bottom-bar">
+        <!-- Hidden Google Element Hook -->
+        <div id="google_translate_element" style="display: none !important;"></div>
+
+        <div class="input-container">
+          <div class="input-wrapper" id="input-wrapper" style="position: relative;">
+            <!-- Floating Language Controls -->
+            <div class="language-controls">
+              <button id="language-toggle-btn" class="language-toggle-btn" title="Change Language" aria-label="Select Language">
+                <i data-lucide="languages"></i>
+              </button>
+              <div id="language-menu" class="language-menu" style="display: none;">
+                <!-- Filled dynamically by js/i18n.js -->
+              </div>
+            </div>
+
+            <!-- Textarea -->
+            <textarea id="text-input" class="text-input" placeholder="Ask anything..." rows="1" aria-label="Message Input"></textarea>
+
+            <!-- Expanded State Action Bar -->
+            <div class="input-actions-row">
+              <div class="actions-left">
+                <!-- Upload Files Button -->
+                <button class="action-btn-input upload-btn" id="upload-btn" title="Upload files" type="button" aria-label="Upload File">
+                  <i data-lucide="plus"></i>
+                </button>
+                
+                <!-- LLM Model Capsule Button -->
+                <button class="action-btn-input model-capsule" id="model-capsule-btn" title="Change Model" type="button" aria-label="Select AI Model">
+                  <span>S Pro</span>
+                  <i data-lucide="chevron-down"></i>
+                </button>
+
+                <!-- Browser Web Search Toggle Button -->
+                <button class="search-toggle-btn" id="web-search-btn" title="Search Web" type="button" aria-label="Toggle Web Search">
+                  <i data-lucide="globe"></i>
+                </button>
+              </div>
+              
+              <div class="actions-right">
+                <!-- Send Button -->
+                <button id="send-button" class="send-button" type="button" aria-label="Send Message">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="4" x2="12" y2="20"></line>
+                    <path d="M6 9 L12 4 L18 9"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div> 
+
+  <!-- PWA Auto-Update Script -->
+  <script>
+    (function () {
+      if (!('serviceWorker' in navigator)) return;
+      let refreshing = false;
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+          .then(reg => {
+            setInterval(() => reg.update(), 60 * 1000);
+            reg.addEventListener('updatefound', () => {
+              const newWorker = reg.installing;
+              if (!newWorker) return;
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  _showUpdatingBanner();
+                }
+              });
+            });
+          })
+          .catch(err => console.warn('[PWA] SW registration failed:', err));
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (refreshing) return;
+          refreshing = true;
+          _showUpdatingBanner();
+          setTimeout(() => window.location.reload(), 600);
+        });
+      });
+      function _showUpdatingBanner() {
+        if (document.getElementById('_sw-update-banner')) return;
+        const el = document.createElement('div');
+        el.id = '_sw-update-banner';
+        el.style.cssText = [
+          'position:fixed',
+          'bottom:90px',
+          'left:50%',
+          'transform:translateX(-50%)',
+          'background:var(#fafafa,#000000)',
+          'color:#ffffff',
+          'padding:10px 22px',
+          'border-radius:30px',
+          'box-shadow:0 4px 18px rgba(0,0,0,0.35)',
+          'z-index:99999',
+          'font-weight:600',
+          'font-size:0.9rem',
+          'display:flex',
+          'align-items:center',
+          'gap:10px',
+          'pointer-events:none',
+          'animation:_swSlideUp 0.4s ease forwards',
+        ].join(';');
+        el.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Updating Snèh AI…';
+        document.body.appendChild(el);
+      }
+    })();
+  </script>
+  <style>
+    @keyframes _swSlideUp {
+      from { opacity: 0; transform: translate(-50%, 20px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+  </style>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+    
+  <script> 
+    document.addEventListener("DOMContentLoaded", () => {
+      const textInput = document.getElementById("text-input");
+      if (!textInput) return;
+
+      function adjustInputHeight() {
+        const el = document.getElementById('text-input');
+        if (!el) return;
+        el.style.height = 'auto';
+        const scrollHeight = el.scrollHeight;
+        const newHeight = Math.max(scrollHeight, 38);
+        el.style.height = newHeight + 'px';
+      }
+
+      textInput.addEventListener("blur", () => {
+        if (textInput.value.trim() === "") {
+          textInput.style.minHeight = "";
+        }
+      });
+
+      adjustInputHeight();
+    });
+  </script> 
+
+  <!-- Modular JavaScript (ES modules) -->
+  <script type="module" src="js/config.js"></script>
+  <script type="module" src="js/storage.js"></script>
+  <script type="module" src="js/ui.js"></script>
+  <script type="module" src="js/chat-core.js"></script>
+  <script type="module" src="js/theme.js"></script>
+  <script type="module" src="js/pwa.js"></script>
+  <script type="module" src="js/modal.js"></script>
+  <script type="module" src="js/profile.js"></script>
+  <script type="module" src="js/sidebar.js"></script>
+  <script type="module" src="js/c2.js"></script>
+  <script type="module" src="js/main.js"></script>
+  <script src="js/haptics.js" defer></script>
+  <script src="js/profile-hero-patch.js" defer></script>
+</body>
+</html>

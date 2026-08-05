@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes" />
+  <title>Your Profile – Snèh AI</title>
+  <meta name="description" content="Manage your Snèh AI account information." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/profile-page.css"> <!-- we will create this -->
+  <link rel="stylesheet" href="css/utilities.css">
+  <style>
+    /* Minimal inline fallback – will be overridden by profile-page.css */
+    body { margin: 0; background: var(--app-bg); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+  </style>
+</head>
+<body>
+  <div class="profile-page-container">
+    <!-- Header with back button -->
+    <div class="profile-header">
+      <a href="index.html" class="back-to-app">
+        <i class="fas fa-arrow-left"></i> Back to Snèh AI
+      </a>
+      <div class="profile-header-title">
+        <i class="fas fa-user-circle"></i> Your Account
+      </div>
+      <div></div> <!-- spacer for flex alignment -->
+    </div>
+
+    <!-- Main content -->
+    <div class="profile-content">
+      <!-- Avatar & name -->
+      <div class="profile-avatar-section">
+        <img id="profile-avatar" class="profile-avatar" alt="Profile picture">
+        <h2 id="profile-name" class="profile-name">Loading...</h2>
+        <div class="profile-status">
+          <i class="fas fa-circle" style="font-size: 10px; color: #34c759;"></i> Signed in with Google
+        </div>
+      </div>
+
+      <!-- Info cards -->
+      <div class="profile-card">
+        <div class="info-row">
+          <div class="info-label"><i class="fas fa-envelope"></i> Email address</div>
+          <div class="info-value" id="profile-email">—</div>
+        </div>
+        <div class="info-row editable-row">
+          <div class="info-label"><i class="fas fa-phone-alt"></i> Mobile number</div>
+          <div class="info-value" id="phone-container">
+            <span id="phone-display">—</span>
+            <button class="edit-phone-btn" id="edit-phone-btn"><i class="fas fa-pen"></i> Edit</button>
+          </div>
+        </div>
+        <!-- Future fields go here easily -->
+        <!-- 
+        <div class="info-row editable-row">
+          <div class="info-label"><i class="fas fa-building"></i> Company</div>
+          <div class="info-value" id="company-container">...</div>
+        </div>
+        -->
+      </div>
+
+      <!-- Sign out button -->
+      <button id="signout-btn" class="signout-btn">
+        <i class="fas fa-sign-out-alt"></i> Sign Out
+      </button>
+
+      <div class="profile-footer">
+        <i class="fas fa-shield-alt"></i> Secure session · DBC Technologies, Narwana
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/profile-page.js"></script>
+</body>
+</html>

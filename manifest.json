@@ -1,0 +1,181 @@
+{
+  "name": "Snèh AI - DBC Technologies",
+  "short_name": "Snèh AI",
+  "description": "Your private AI assistant. Powered by  LPU hardware speed, zero user message retention, and live web search by DBC Technologies.",
+  "lang": "en",
+  "dir": "ltr",
+  "id": "https://snehaidbc.netlify.app/",
+  "scope": "/",
+  "start_url": "/?utm_source=pwa_direct",
+  "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "borderless",
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "portrait",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "prefer_related_applications": false,
+  "categories": [
+    "productivity",
+    "business",
+    "utilities"
+  ],
+  "version": "5.4.3",
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Conversation",
+      "short_name": "New Chat",
+      "description": "Clear workspace and start a fresh session",
+      "url": "/?action=new-chat&utm_source=pwa_shortcut",
+      "icons": [
+        {
+          "src": "/icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "DBC Technologies",
+      "short_name": "DBC",
+      "description": "Direct communication with DBC corporate executive",
+      "url": "/?action=contact-dbc&utm_source=pwa_shortcut",
+      "icons": [
+        {
+          "src": "/icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Account Settings",
+      "short_name": "Settings",
+      "description": "Adjust layout, opacities, and account preferences",
+      "url": "/?action=settings&utm_source=pwa_shortcut",
+      "icons": [
+        {
+          "src": "/icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Product Features",
+      "short_name": "Features",
+      "description": "Explore Snèh AI features and architecture",
+      "url": "/features/?utm_source=pwa_shortcut",
+      "icons": [
+        {
+          "src": "/icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/?action=share-target&utm_source=pwa_share",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "file_handlers": [
+    {
+      "action": "/?action=file-handler&utm_source=pwa_file",
+      "accept": {
+        "text/plain": [".txt", ".md"],
+        "application/json": [".json", ".sneh"]
+      }
+    }
+  ],
+  "launch_handler": {
+    "client_mode": [
+      "focus-existing",
+      "auto"
+    ]
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+snehai",
+      "url": "/?action=protocol&uri=%s"
+    }
+  ],
+  "scope_extensions": [
+    {
+      "origin": "https://snehaidbc.netlify.app"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop-1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshots/mobile-1.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}
