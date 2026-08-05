@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Snèh AI vs ChatGPT — Objective Architectural & Feature Comparison</title>
+  <meta name="description" content="An objective, technical comparison between Snèh AI and ChatGPT. Learn about differences in inference hardware, privacy architectures, web grounding, and accessibility." />
+  <link rel="canonical" href="https://snehaidbc.netlify.app/vs-chatgpt/" />
+  <meta name="author" content="DBC Technologies" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+
+  <style>
+    /* ─── Base ─── */
+    body {
+      background: var(--app-bg, #FAFAFA);
+      color: var(--text-primary, #1c1c1e);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 720px; /* unified */
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+    .back-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary, #0B57CF);
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      transition: opacity 0.2s ease;
+    }
+    .back-nav:hover { opacity: 0.85; }
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary, #606770);
+      margin-bottom: 2rem;
+    }
+
+    /* ─── Table ─── */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 2rem 0;
+      border-radius: 16px;
+      border: 1px solid var(--input-border-color, rgba(0,0,0,0.1));
+      background: var(--bg-primary, #ffffff);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      min-width: 600px;
+    }
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--input-border-color, rgba(0,0,0,0.08));
+      font-size: 0.95rem;
+    }
+    th {
+      background: rgba(0,0,0,0.03);
+      font-weight: 700;
+      color: var(--text-primary, #1c1c1e);
+    }
+    tr:last-child td { border-bottom: none; }
+    .highlight-cell { font-weight: 600; color: var(--primary, #0B57CF); }
+
+    /* ─── Cards ─── */
+    .card {
+      background: var(--bg-primary, #ffffff);
+      border: 1px solid var(--input-border-color, rgba(0,0,0,0.1));
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      color: var(--primary, #0B57CF);
+    }
+    .card p {
+      margin-bottom: 0;
+      color: var(--text-secondary, #606770);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--input-border-color, rgba(0,0,0,0.1));
+      font-size: 0.85rem;
+      color: var(--text-tertiary, #8e8e93);
+      text-align: center;
+    }
+
+    /* ─── Sticky Header ─── */
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--app-bg, #FAFAFA);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid transparent;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transform: translateY(-120%);
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.3s ease,
+                  box-shadow 0.3s ease;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      will-change: transform, opacity;
+    }
+    .sticky-header.visible {
+      transform: translateY(0);
+      opacity: 1;
+      border-bottom-color: var(--input-border-color, rgba(0, 0, 0, 0.08));
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    }
+    .sticky-header .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary, #0B57CF);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: opacity 0.2s ease;
+      white-space: nowrap;
+    }
+    .sticky-header .back-link:hover { opacity: 0.8; }
+    .sticky-header .back-link i { font-size: 1rem; }
+    .sticky-header .header-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+    .sticky-header .header-spacer { flex: 1; }
+    .sticky-header .mini-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid var(--input-border-color, rgba(0, 0, 0, 0.08));
+      flex-shrink: 0;
+      background: var(--bg-secondary);
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 1.25rem 0.9rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      .subtitle { font-size: 0.95rem; }
+      th, td { padding: 10px 12px; font-size: 0.85rem; }
+      .card { padding: 1.25rem; }
+      .card h2 { font-size: 1.05rem; }
+      .sticky-header { padding: 0.6rem 0.9rem; }
+      .sticky-header .header-title { font-size: 1rem; }
+      .sticky-header .back-link { font-size: 0.85rem; }
+      .sticky-header .mini-avatar { width: 26px; height: 26px; }
+      .back-nav { font-size: 0.85rem; margin-bottom: 1.25rem; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Snèh AI vs ChatGPT Comparison",
+    "url": "https://snehaidbc.netlify.app/vs-chatgpt/",
+    "description": "An objective comparison analyzing architectural, privacy, and performance differences between Snèh AI and ChatGPT.",
+    "author": { "@type": "Organization", "name": "DBC Technologies" },
+    "publisher": { "@type": "Organization", "name": "DBC Technologies", "logo": "https://snehaidbc.netlify.app/icons/icon-512x512.png" }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== STICKY HEADER ===== -->
+  <header class="sticky-header" id="stickyHeader">
+    <a href="/resources" class="back-link"><i class="fas fa-arrow-left"></i> Resources</a>
+    <span class="header-title">vs ChatGPT</span>
+    <span class="header-spacer"></span>
+    <img class="mini-avatar" src="https://lh3.googleusercontent.com/a/default-user" alt="avatar" referrerpolicy="no-referrer">
+  </header>
+
+  <div class="container">
+    <a href="/resources" class="back-nav"><i class="fas fa-arrow-left"></i> Back to Resources</a>
+    
+    <h1>Snèh AI vs ChatGPT Comparison</h1>
+    <p class="subtitle">An objective technical overview explaining the design choices, infrastructure differences, and privacy frameworks of Snèh AI and ChatGPT.</p>
+
+    <!-- Comparison Table -->
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Architecture Dimension</th><th>Snèh AI</th><th>ChatGPT (Free Consumer Tier)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Inference Acceleration</strong></td><td class="highlight-cell">Sneh-V3 ® LPU™ Hardware Routing</td><td>Standard GPU Clusters</td></tr>
+          <tr><td><strong>User Data Training Policy</strong></td><td class="highlight-cell">Zero User Data Training</td><td>Prompts Used for Training (Unless Opted Out)</td></tr>
+          <tr><td><strong>Memory Processing</strong></td><td class="highlight-cell">Volatile Server RAM Session Flushing</td><td>Persistent Account Message Logs</td></tr>
+          <tr><td><strong>Live Web Grounding</strong></td><td class="highlight-cell">Integrated Toggleable Web Search</td><td>Tier Dependent / Account Gated</td></tr>
+          <tr><td><strong>Account Requirements</strong></td><td class="highlight-cell">Instant Browser / Guest Access</td><td>Mandatory User Account Registration</td></tr>
+          <tr><td><strong>PWA Standalone App</strong></td><td class="highlight-cell">Installable Cross-Platform PWA</td><td>Web Browser / Native App Store Downloads</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Detailed Section Explanations -->
+    <div class="card">
+      <h2>1. Privacy & Zero-Retention Architecture</h2>
+      <p>Snèh AI is designed with an explicit zero-retention data policy. User conversations are processed in volatile RAM buffers during active response streaming and flushed immediately after completion. Prompts submitted to Snèh AI are never retained to pre-train or fine-tune public base models. In contrast, standard consumer web interfaces typically retain chat logs for model improvement unless users explicitly adjust privacy settings.</p>
+    </div>
+    <div class="card">
+      <h2>2. Inference Hardware & Token Latency</h2>
+      <p>Snèh AI routes model requests through Sneh-V3 ® Language Processing Units (LPUs), an architecture engineered specifically for low-latency sequential token streaming. This setup delivers ultra-fast response generation, making it suited for real-time coding assistance and rapid research queries.</p>
+    </div>
+    <div class="card">
+      <h2>3. Accessibility & Standalone Deployment</h2>
+      <p>While OpenAI operates a centralized platform requiring account authentication, Snèh AI provides immediate web access alongside an installable Progressive Web Application (PWA). This allows users to run Snèh AI on mobile and desktop platforms as a lightweight, independent workspace application.</p>
+    </div>
+
+    <footer>
+      <p>© 2026 DBC Technologies (DBC Technologies Narwana). All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const stickyHeader = document.getElementById('stickyHeader');
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > 80) stickyHeader.classList.add('visible');
+        else stickyHeader.classList.remove('visible');
+      }, { passive: true });
+    });
+  </script>
+</body>
+</html>
