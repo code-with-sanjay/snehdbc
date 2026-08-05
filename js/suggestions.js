@@ -1,5 +1,12 @@
 // js/suggestions.js
+import { GROQ_API_KEYS } from './config.js';
 import { sessions } from './storage.js';
+
+function getRandomKey() {
+    const validKeys = GROQ_API_KEYS.filter(key => key && key.trim() !== "");
+    if (validKeys.length === 0) throw new Error("No valid Groq API keys found");
+    return validKeys[Math.floor(Math.random() * validKeys.length)];
+}
 
 function extractJSONPrompts(text) {
     try {
@@ -30,8 +37,9 @@ export async function getWelcomePrompts() {
         const now = Date.now();
         const cachedTime = localStorage.getItem('sneh_welcome_time');
         const cachedPrompts = localStorage.getItem('sneh_welcome_prompts');
-        const SIX_HOURS_MS = 21600000;
+        const SIX_HOURS_MS = 21600000; // 6 hours
 
+        // ✅ CORRECT expiry check
         if (cachedTime && cachedPrompts && (now - parseInt(cachedTime)) < SIX_HOURS_MS) {
             return JSON.parse(cachedPrompts);
         }
@@ -55,9 +63,9 @@ export async function getWelcomePrompts() {
         try {
             const systemPrompt = `Analyze the user's past 10 queries:\n${userHistory.join('\n')}\nGenerate 3 personalized, highly relevant questions or tasks the user is likely to ask next. Keep them between 6 to 11 words. Return ONLY a valid JSON array of 3 strings. Example: ["How can I optimize my previous JavaScript code?"]`;
 
-            const response = await fetch("/.netlify/functions/chat", {
+            const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${getRandomKey()}` },
                 body: JSON.stringify({
                     model: "llama-3.3-70b-versatile",
                     messages: [{ role: "system", content: systemPrompt }],
@@ -96,11 +104,11 @@ export async function getFollowUpQuestions(currentMessages, signal) {
     if (!currentMessages || currentMessages.length < 2) return null;
     const recentContext = currentMessages.slice(-4);
     
-    const fetchPrompts = async () => {
+    const fetchPrompts = async (retries = 1) => {
         try {
-            const response = await fetch("/.netlify/functions/chat", {
+            const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${getRandomKey()}` },
                 signal: signal,
                 body: JSON.stringify({
                     model: "llama-3.3-70b-versatile",
@@ -112,6 +120,11 @@ export async function getFollowUpQuestions(currentMessages, signal) {
                     max_tokens: 100
                 })
             });
+
+            if (response.status === 429 && retries > 0) {
+                await new Promise(res => setTimeout(res, 2000));
+                return fetchPrompts(retries - 1);
+            }
 
             if (!response.ok) return null;
             const data = await response.json();
