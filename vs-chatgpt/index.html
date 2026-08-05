@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Snèh AI vs ChatGPT — Detailed Feature & Privacy Comparison</title>
+  <meta name="description" content="Detailed comparison between Snèh AI and ChatGPT. Discover how Snèh AI provides Sneh-V3  LPU speed, zero user data training, and free web browsing." />
+  <link rel="canonical" href="https://snehaidbc.netlify.app/vs-chatgpt/" />
+  <meta name="author" content="DBC Technologies" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+
+  <style>
+    /* ─── Reset & Base ─── */
+    body {
+      background: var(--app-bg, #FAFAFA);
+      color: var(--text-primary, #1c1c1e);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 720px; /* same as Settings & Resources */
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+    .back-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary, #0B57CF);
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      transition: opacity 0.2s ease;
+    }
+    .back-nav:hover { opacity: 0.8; }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 0 0 0.5rem 0;
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary, #606770);
+      margin: 0 0 2rem 0;
+    }
+
+    /* ─── Table Wrapper (scroll on tiny screens) ─── */
+    .table-wrapper {
+      border-radius: var(--radius-md, 16px);
+      border: 1px solid var(--input-border-color, rgba(0,0,0,0.08));
+      background: var(--bg-primary, #ffffff);
+      overflow: hidden;
+    }
+
+    /* Desktop table style */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    th, td {
+      padding: 14px 18px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--input-border-color, rgba(0,0,0,0.06));
+    }
+    th {
+      background: rgba(0,0,0,0.02);
+      font-weight: 700;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .check { color: #34c759; font-weight: 700; }
+    .cross { color: #ff3b30; font-weight: 700; }
+
+    /* ─── Mobile: convert table to card list ─── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 1.25rem 0.9rem 3rem;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+      .subtitle {
+        font-size: 0.95rem;
+      }
+
+      /* Force table to behave like cards */
+      table, thead, tbody, tr, th, td {
+        display: block;
+      }
+
+      /* Hide table headers on mobile */
+      thead {
+        display: none;
+      }
+
+      tr {
+        border-bottom: 1px solid var(--input-border-color, rgba(0,0,0,0.08));
+        padding: 0.75rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      tr:last-child {
+        border-bottom: none;
+      }
+
+      td {
+        padding: 6px 16px;
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 10px;
+        font-size: 0.9rem;
+      }
+
+      /* Add pseudo‑label from the header */
+      td:first-child {
+        font-weight: 700;
+        color: var(--text-primary);
+        font-size: 0.95rem;
+        border-bottom: 1px solid var(--input-border-color, rgba(0,0,0,0.04));
+        padding-bottom: 8px;
+        margin-bottom: 4px;
+        justify-content: flex-start;
+      }
+      td:first-child::before {
+        content: 'Feature';
+        display: block;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--text-tertiary, #8e8e93);
+        margin-bottom: 2px;
+      }
+
+      td:nth-child(2)::before {
+        content: 'Snèh AI';
+        font-weight: 600;
+        color: var(--text-secondary);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+      td:nth-child(3)::before {
+        content: 'ChatGPT (Free)';
+        font-weight: 600;
+        color: var(--text-secondary);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+
+      td:not(:first-child)::before {
+        flex: 0 0 auto;
+        margin-right: 8px;
+      }
+
+      td:not(:first-child) {
+        justify-content: space-between;
+      }
+
+      .table-wrapper {
+        border: none;
+        background: transparent;
+        border-radius: 0;
+      }
+    }
+
+    /* ─── Sticky Header (identical to other pages) ─── */
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--app-bg, #FAFAFA);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid transparent;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transform: translateY(-120%);
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.3s ease,
+                  box-shadow 0.3s ease;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      will-change: transform, opacity;
+    }
+    .sticky-header.visible {
+      transform: translateY(0);
+      opacity: 1;
+      border-bottom-color: var(--input-border-color, rgba(0, 0, 0, 0.08));
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    }
+    .sticky-header .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary, #0B57CF);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: opacity 0.2s ease;
+      white-space: nowrap;
+    }
+    .sticky-header .back-link:hover { opacity: 0.8; }
+    .sticky-header .back-link i { font-size: 1rem; }
+    .sticky-header .header-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+    .sticky-header .header-spacer { flex: 1; }
+    .sticky-header .mini-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid var(--input-border-color, rgba(0, 0, 0, 0.08));
+      flex-shrink: 0;
+      background: var(--bg-secondary);
+    }
+
+    @media (max-width: 600px) {
+      .sticky-header {
+        padding: 0.6rem 0.9rem;
+      }
+      .sticky-header .header-title {
+        font-size: 1rem;
+      }
+      .sticky-header .back-link {
+        font-size: 0.85rem;
+      }
+      .sticky-header .mini-avatar {
+        width: 26px;
+        height: 26px;
+      }
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--input-border-color, rgba(0,0,0,0.1));
+      font-size: 0.85rem;
+      color: var(--text-tertiary, #8e8e93);
+      text-align: center;
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Snèh AI vs ChatGPT Comparison",
+    "url": "https://snehaidbc.netlify.app/vs-chatgpt/",
+    "publisher": {
+      "@type": "Organization",
+      "name": "DBC Technologies"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== STICKY HEADER ===== -->
+  <header class="sticky-header" id="stickyHeader">
+    <a href="/resoures" class="back-link"><i class="fas fa-arrow-left"></i> Resources</a>
+    <span class="header-title"></span>
+    <span class="header-spacer"></span>
+    <img class="mini-avatar" src="https://lh3.googleusercontent.com/a/default-user" alt="avatar" referrerpolicy="no-referrer">
+  </header>
+
+  <div class="container">
+    <a href="/resources" class="back-nav"><i class="fas fa-arrow-left"></i> Resources</a>
+
+    <h1>Snèh AI vs ChatGPT</h1>
+    <p class="subtitle">How Snèh AI compares in speed, privacy, and feature accessibility.</p>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Snèh AI</th>
+            <th>ChatGPT (Free)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Inference Acceleration</strong></td>
+            <td><span class="check">Sneh-V3 ® LPU™ Hardware</span></td>
+            <td>Standard GPU Cluster</td>
+          </tr>
+          <tr>
+            <td><strong>User Data Privacy</strong></td>
+            <td><span class="check">Zero Training on Prompts</span></td>
+            <td><span class="cross">Used for Training (Unless Opted Out)</span></td>
+          </tr>
+          <tr>
+            <td><strong>Live Web Browsing</strong></td>
+            <td><span class="check">Free &amp; Integrated</span></td>
+            <td>Restricted</td>
+          </tr>
+          <tr>
+            <td><strong>Guest Access</strong></td>
+            <td><span class="check">Available Without Signup</span></td>
+            <td><span class="cross">Account Mandatory</span></td>
+          </tr>
+          <tr>
+            <td><strong>PWA Standalone App</strong></td>
+            <td><span class="check">Supported (iOS/Android/Desktop)</span></td>
+            <td>Web Browser Only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer>
+      <p>© 2026 DBC Technologies (DBC Technologies Narwana). All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Theme sync
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+
+      // Sticky header scroll
+      const stickyHeader = document.getElementById('stickyHeader');
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > 80) {
+          stickyHeader.classList.add('visible');
+        } else {
+          stickyHeader.classList.remove('visible');
+        }
+        lastScrollY = currentScrollY;
+      }, { passive: true });
+    });
+  </script>
+</body>
+</html>
