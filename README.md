@@ -5,7 +5,7 @@
 > **Your Private, Web-Connected AI Companion Powered by Sneh V3® LPU™ Hardware Speed & Zero-Retention Data Privacy.**
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/snehaidbc/deploy-status)](https://snehaidbc.netlify.app/)
-![Version](https://img.shields.io/badge/version-5.2.5-0B57CF?style=flat-square)
+![Version](https://img.shields.io/badge/version-5.2.25-0B57CF?style=flat-square)
 ![PWA Ready](https://img.shields.io/badge/PWA-Installable-34c759?style=flat-square)
 ![Privacy](https://img.shields.io/badge/Data_Privacy-Zero_Retention-ff9500?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
