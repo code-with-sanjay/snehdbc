@@ -1,0 +1,221 @@
+<!-- profile-full.html – replaces the old modal content -->
+<div class="modal-content profile-dashboard-content">
+  <!-- Header -->
+  <div class="modal-header">
+    <h2 class="modal-title">
+      <i data-lucide="settings" class="settings-title-icon"></i>
+      Settings
+    </h2>
+    <button class="modal-close" onclick="closeProfileModal()">&times;</button>
+  </div>
+
+  <div class="modal-body settings-layout">
+    <!-- Profile Hero Info -->
+    <div class="settings-profile-hero">
+      <div class="hero-avatar-wrapper">
+        <img id="full-avatar" class="hero-avatar" src="" alt="Avatar" referrerpolicy="no-referrer">
+      </div>
+      <div class="hero-info">
+        <h3 id="full-name" class="hero-name">Loading...</h3>
+        <span class="hero-badge"><i class="fas fa-shield-alt"></i> Secure Session</span>
+      </div>
+    </div>
+
+    <!-- Scrollable Cards -->
+    <div class="settings-sections">
+      
+      <!-- Card 1: Identity -->
+      <div class="settings-card">
+        <div class="card-header-label">Profile & Identity</div>
+        
+        <div class="settings-row">
+          <div class="row-left">
+            <i data-lucide="user" class="row-icon"></i>
+            <span class="row-label">Display Name</span>
+          </div>
+          <span id="full-display-name" class="row-val">—</span>
+        </div>
+
+        <div class="settings-row">
+          <div class="row-left">
+            <i data-lucide="mail" class="row-icon"></i>
+            <span class="row-label">Email Address</span>
+          </div>
+          <span id="full-email" class="row-val">—</span>
+        </div>
+
+        <div class="settings-row">
+          <div class="row-left">
+            <i data-lucide="shield" class="row-icon"></i>
+            <span class="row-label">Auth Provider</span>
+          </div>
+          <span class="row-val text-bound"><i class="fab fa-google"></i> Google Bound</span>
+        </div>
+
+        <div class="settings-row">
+          <div class="row-left">
+            <i data-lucide="hash" class="row-icon"></i>
+            <span class="row-label">User ID</span>
+          </div>
+          <span id="full-user-id" class="row-val val-code">—</span>
+        </div>
+
+        <!-- NEW: Date of Birth row (replaces phone row) -->
+        <div class="settings-row clickable-row" id="dob-row-trigger">
+          <div class="row-left">
+            <i data-lucide="calendar" class="row-icon"></i>
+            <span class="row-label">Date of Birth</span>
+          </div>
+          <div id="dob-container" class="row-right">
+            <span id="dob-display">Not set</span>
+            <i data-lucide="chevron-right" class="chevron-icon"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: App Customization -->
+      <div class="settings-card">
+        <div class="card-header-label">App Settings</div>
+        
+        <div class="settings-row clickable-row" id="theme-row-trigger">
+          <div class="row-left">
+            <i data-lucide="palette" class="row-icon"></i>
+            <span class="row-label">Appearance</span>
+          </div>
+          <div class="row-right">
+            <span id="full-theme-mode" class="row-val">—</span>
+            <i data-lucide="chevron-right" class="chevron-icon"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Data Controls -->
+      <div class="settings-card">
+        <div class="card-header-label">Data Controls</div>
+        
+        <div class="settings-row">
+          <div class="row-left">
+            <i data-lucide="activity" class="row-icon"></i>
+            <div class="row-label-group">
+              <span class="row-label">Improve the model for everyone</span>
+              <span class="row-sublabel">Allow chat data securely to improve response metrics.</span>
+            </div>
+          </div>
+          <label class="switch-toggle">
+            <input type="checkbox" id="improve-model-toggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <!-- Custom delete all conversations row (uses custom dialog) -->
+        <div class="settings-row clickable-row row-danger" id="delete-chats-trigger">
+          <div class="row-left">
+            <i data-lucide="trash-2" class="row-icon danger-icon"></i>
+            <span class="row-label danger-text">Delete all conversations</span>
+          </div>
+          <i data-lucide="chevron-right" class="chevron-icon"></i>
+        </div>
+      </div>
+
+      <!-- Card 4: Legal & Policies -->
+      <div class="settings-card">
+        <div class="card-header-label">Service Agreement</div>
+        
+        <div class="settings-row clickable-row" onclick="closeProfileModal(); openLegalSection('Terms and Conditions')">
+          <div class="row-left">
+            <i data-lucide="file-text" class="row-icon"></i>
+            <span class="row-label">Terms of Use</span>
+          </div>
+          <i data-lucide="chevron-right" class="chevron-icon"></i>
+        </div>
+
+        <div class="settings-row clickable-row" onclick="closeProfileModal(); openLegalSection('Privacy Policy')">
+          <div class="row-left">
+            <i data-lucide="lock" class="row-icon"></i>
+            <span class="row-label">Privacy Policy</span>
+          </div>
+          <i data-lucide="chevron-right" class="chevron-icon"></i>
+        </div>
+      </div>
+
+      <!-- Card 5: About -->
+      <div class="settings-card">
+        <div class="card-header-label">About</div>
+        
+        <div class="settings-row clickable-row" id="check-updates-trigger">
+          <div class="row-left">
+            <i data-lucide="info" class="row-icon"></i>
+            <span class="row-label">Check for updates</span>
+          </div>
+          <div class="row-right">
+            <span class="row-val update-val-tag">v2.4199</span>
+            <i data-lucide="chevron-right" class="chevron-icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Actions -->
+    <div class="settings-actions">
+      <button id="full-signout-btn" class="signout-action-btn">
+        <i class="fas fa-sign-out-alt"></i> Log Out Account
+      </button>
+    </div>
+  </div>
+
+  <!-- Appearance selection dialog overlay (unchanged) -->
+  <div class="sub-dialog-overlay" id="theme-dialog-overlay" style="display: none;">
+    <div class="sub-dialog-box">
+      <div class="sub-dialog-header">
+        <h3>Appearance</h3>
+      </div>
+      <div class="sub-dialog-body">
+        <label class="radio-option">
+          <input type="radio" name="appearance-theme" value="light" id="theme-radio-light">
+          <span class="radio-label">Light Mode</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="appearance-theme" value="dark" id="theme-radio-dark">
+          <span class="radio-label">Dark Mode</span>
+        </label>
+      </div>
+      <div class="sub-dialog-footer">
+        <button class="dialog-cancel-btn" id="theme-dialog-cancel">Cancel</button>
+        <button class="dialog-confirm-btn" id="theme-dialog-confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW: Date of Birth input dialog -->
+  <div class="sub-dialog-overlay" id="dob-dialog-overlay" style="display: none;">
+    <div class="sub-dialog-box">
+      <div class="sub-dialog-header">
+        <h3>Your Date of Birth</h3>
+      </div>
+      <div class="sub-dialog-body">
+        <input type="date" id="dob-input" style="width: 100%; padding: 10px; border-radius: 12px; border: 1px solid var(--input-border-color); background: var(--input-bg1); color: var(--text-primary); font-size: 1rem;">
+        <p style="font-size: 0.75rem; margin-top: 10px; color: var(--text-secondary);">You must be at least 13 years old and max 125 years old to use Snèh AI.</p>
+      </div>
+      <div class="sub-dialog-footer">
+        <button class="dialog-cancel-btn" id="dob-dialog-cancel">Cancel</button>
+        <button class="dialog-confirm-btn" id="dob-dialog-confirm">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW: Delete confirmation dialog (custom) -->
+  <div class="sub-dialog-overlay" id="delete-dialog-overlay" style="display: none;">
+    <div class="sub-dialog-box">
+      <div class="sub-dialog-header">
+        <h3>Delete all conversations?</h3>
+      </div>
+      <div class="sub-dialog-body">
+        <p style="font-size: 0.9rem; color: var(--text-primary);">This action cannot be undone. All your chat history will be permanently removed.</p>
+      </div>
+      <div class="sub-dialog-footer">
+        <button class="dialog-cancel-btn" id="delete-dialog-cancel">Cancel</button>
+        <button class="dialog-confirm-btn" id="delete-dialog-confirm">Yes, delete</button>
+      </div>
+    </div>
+  </div>
+</div>

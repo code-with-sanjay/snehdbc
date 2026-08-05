@@ -1,0 +1,67 @@
+<div class="modal-content profile-dashboard-content">
+  <div class="modal-header">
+    <h2 class="modal-title">
+      <i data-lucide="user-circle" style="margin-right: 10px; color: var(--primary);"></i>
+      Account Dashboard
+    </h2>
+    <button class="modal-close" onclick="closeProfileModal()">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="profile-dashboard-header">
+      <div class="profile-dashboard-avatar-container">
+        <img id="profile-dash-avatar" class="profile-dashboard-avatar" src="" alt="Avatar">
+      </div>
+      <h3 id="profile-dash-name" class="profile-dashboard-name"></h3>
+      <span class="profile-dashboard-status-badge">
+        <i class="fas fa-circle" style="font-size: 8px; color: #34c759;"></i> Secure Cloud Session
+      </span>
+    </div>
+
+    <div class="profile-dashboard-grid">
+      <div class="profile-dashboard-section">
+        <h4 class="profile-dashboard-section-title"><i data-lucide="id-card"></i> Identity</h4>
+        <div class="profile-detail-item">
+          <span class="detail-label">Full Name</span>
+          <span id="profile-dash-fullname" class="detail-value"></span>
+        </div>
+        <div class="profile-detail-item">
+          <span class="detail-label">Email Address</span>
+          <span id="profile-dash-email" class="detail-value"></span>
+        </div>
+        <div class="profile-detail-item">
+          <span class="detail-label">Provider</span>
+          <span class="detail-value"><i class="fab fa-google"></i> Google</span>
+        </div>
+        <div class="profile-detail-item">
+          <span class="detail-label">User ID</span>
+          <span id="profile-dash-id" class="detail-value code-font"></span>
+        </div>
+      </div>
+
+      <div class="profile-dashboard-section">
+        <h4 class="profile-dashboard-section-title"><i data-lucide="settings"></i> Environment</h4>
+        <div class="profile-detail-item">
+          <span class="detail-label">API Gateway</span>
+          <span class="detail-value">Groq Cloud</span>
+        </div>
+        <div class="profile-detail-item">
+          <span class="detail-label">Model Engine</span>
+          <span class="detail-value">Llama 3.3 / Mini</span>
+        </div>
+        <div class="profile-detail-item">
+          <span class="detail-label">Theme</span>
+          <span id="profile-dash-theme" class="detail-value"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-dashboard-actions">
+      <button id="profile-dashboard-logout-btn" class="profile-dashboard-btn logout-action-btn">
+        <i class="fas fa-sign-out-alt"></i> Sign Out
+      </button>
+    </div>
+  </div>
+  <div class="profile-dashboard-footer">
+    <i class="fas fa-shield-alt"></i> Encrypted workspace · DBC Technologies
+  </div>
+</div>

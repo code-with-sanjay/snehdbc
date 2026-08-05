@@ -1,0 +1,234 @@
+<!-- Careers & Business Modal with Lucide Icons (Startup‑friendly, no degree/ year requirements) -->
+
+<div class="modal-content careers-modal-content">
+    <div class="modal-header">
+        <h2 class="modal-title">
+            <i data-lucide="zap" style="margin-right: 10px; color: var(--highlight);"></i>
+            Future-Driven AI by DBC
+        </h2>
+        <button class="modal-close" onclick="closeModal('careers-modal')">&times;</button>
+    </div>
+    <div class="modal-body">
+
+     
+
+        <!-- Filter chips -->
+        <div class="filter-chips">
+            <span class="chip active" data-filter="all">All</span>
+            <span class="chip" data-filter="ai">AI Research</span>
+            <span class="chip" data-filter="design">UI/UX</span>
+            <span class="chip" data-filter="dev">Engineering</span>
+            <span class="chip" data-filter="business">Business</span>
+        </div>
+
+        <!-- Two‑column layout -->
+        <div class="careers-grid">
+            <!-- LEFT COLUMN: Open Positions -->
+            <div class="careers-col">
+                <h3 class="careers-col-title"><i data-lucide="briefcase"></i> Open Positions</h3>
+                <div class="role-list" id="role-list">
+                    <!-- Role 1: AI Engineer -->
+                    <div class="role-card" data-category="ai">
+                        <div class="role-header" onclick="toggleRoleDetails(this)">
+                            <i data-lucide="brain" class="role-icon"></i>
+                            <div class="role-info">
+                                <h4>AI Engineer – LLMs & Creative Problem Solving</h4>
+                                <p class="role-tagline">Build smart, weird, wonderful things with language models.</p>
+                            </div>
+                            <i data-lucide="chevron-down" class="toggle-icon"></i>
+                        </div>
+                        <div class="role-details">
+                            <p><strong>What you’ll do:</strong> Fine‑tune open models (Llama, Mistral, Qwen); build RAG pipelines; experiment with agents; optimise inference for low cost.</p>
+                            <p><strong>What we look for:</strong> A GitHub or blog that shows curiosity. PyTorch / TensorFlow exposure. You’ve built something – a bot, a summariser, a weird demo. No degree required. Self‑taught is a superpower.</p>
+                            <a href="mailto:team.dbc@consultant.com?subject=AI%20Engineer%20(LLMs)" class="role-apply">Apply with your work <i data-lucide="arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Role 2: UI/UX Tinkerer -->
+                    <div class="role-card" data-category="design">
+                        <div class="role-header" onclick="toggleRoleDetails(this)">
+                            <i data-lucide="paintbrush" class="role-icon"></i>
+                            <div class="role-info">
+                                <h4>UI/UX Tinkerer – AI‑First Tools</h4>
+                                <p class="role-tagline">Make complex AI feel simple and delightful.</p>
+                            </div>
+                            <i data-lucide="chevron-down" class="toggle-icon"></i>
+                        </div>
+                        <div class="role-details">
+                            <p><strong>What you’ll do:</strong> Design dashboards for GPU usage, LLM playgrounds, and vector search explorers. Prototype in Figma, then help frontend folks bring it to life.</p>
+                            <p><strong>What we look for:</strong> A portfolio (even if it’s just side projects) showing taste, clarity, and empathy for developers. You love grids, dark mode, and micro‑interactions.</p>
+                            <a href="mailto:team.dbc@consultant.com?subject=UI%2FUX%20Tinkerer" class="role-apply">Share your portfolio <i data-lucide="arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Role 3: Frontend Builder -->
+                    <div class="role-card" data-category="dev">
+                        <div class="role-header" onclick="toggleRoleDetails(this)">
+                            <i data-lucide="code" class="role-icon"></i>
+                            <div class="role-info">
+                                <h4>Frontend Builder – Reactive UIs for AI</h4>
+                                <p class="role-tagline">Turn APIs into buttery‑smooth developer consoles.</p>
+                            </div>
+                            <i data-lucide="chevron-down" class="toggle-icon"></i>
+                        </div>
+                        <div class="role-details">
+                            <p><strong>What you’ll do:</strong> Build real‑time dashboards (WebSockets, Server‑Sent Events); create reusable components; make the UI feel fast even with huge logs.</p>
+                            <p><strong>What we look for:</strong> You’ve shipped something. React, Vue, Svelte – we don’t care. You know CSS well enough to make things not ugly. TypeScript is nice, but clean JS is fine.</p>
+                            <a href="mailto:team.dbc@consultant.com?subject=Frontend%20Builder" class="role-apply">Show your repo <i data-lucide="arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Role 4: Backend Craftsman -->
+                    <div class="role-card" data-category="dev">
+                        <div class="role-header" onclick="toggleRoleDetails(this)">
+                            <i data-lucide="database" class="role-icon"></i>
+                            <div class="role-info">
+                                <h4>Backend Craftsman – APIs, Queues & GPUs</h4>
+                                <p class="role-tagline">Glue AI models to the rest of the world.</p>
+                            </div>
+                            <i data-lucide="chevron-down" class="toggle-icon"></i>
+                        </div>
+                        <div class="role-details">
+                            <p><strong>What you’ll do:</strong> Write fast async APIs (FastAPI / Express); manage background jobs; talk to vector databases; deploy on Kubernetes without breaking things.</p>
+                            <p><strong>What we look for:</strong> You understand how to not block the event loop. You’ve used Docker and can debug a 500 error. Experience with GPUs? Even better.</p>
+                            <a href="mailto:team.dbc@consultant.com?subject=Backend%20Craftsman" class="role-apply">Send your best project <i data-lucide="arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Role 5: Cloud & GPU Hobbyist -->
+                    <div class="role-card" data-category="dev">
+                        <div class="role-header" onclick="toggleRoleDetails(this)">
+                            <i data-lucide="cloud" class="role-icon"></i>
+                            <div class="role-info">
+                                <h4>Cloud & GPU Hobbyist – Terraform, K8s, Spot Instances</h4>
+                                <p class="role-tagline">Keep our GPUs humming, costs low, and uptime high.</p>
+                            </div>
+                            <i data-lucide="chevron-down" class="toggle-icon"></i>
+                        </div>
+                        <div class="role-details">
+                            <p><strong>What you’ll do:</strong> Spin up GPU nodes (AWS/GCP/Azure); automate with Terraform; set up monitoring (Prometheus + Grafana); help devs get their models deployed fast.</p>
+                            <p><strong>What we look for:</strong> You’ve run a Kubernetes cluster at home or in the cloud – maybe for Plex, maybe for Stable Diffusion. You love bash, Python, and fixing weird networking issues.</p>
+                            <a href="mailto:team.dbc@consultant.com?subject=Cloud%20%26%20GPU%20Hobbyist" class="role-apply">Tell us about your homelab <i data-lucide="arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Role 6: Developer Experience Engineer -->
+                    <div class="role-card" data-category="dev">
+                        <div class="role-header" onclick="toggleRoleDetails(this)">
+                            <i data-lucide="smile" class="role-icon"></i>
+                            <div class="role-info">
+                                <h4>Developer Experience (DX) Engineer</h4>
+                                <p class="role-tagline">Write docs, build SDKs, reduce friction.</p>
+                            </div>
+                            <i data-lucide="chevron-down" class="toggle-icon"></i>
+                        </div>
+                        <div class="role-details">
+                            <p><strong>What you’ll do:</strong> Create Python/JS SDKs; write tutorials and API references; build example apps; collect feedback from early users.</p>
+                            <p><strong>What we look for:</strong> You love making complex APIs feel simple. You’ve contributed to open source docs or built a small library. Empathy for other developers is your main skill.</p>
+                            <a href="mailto:team.dbc@consultant.com?subject=DX%20Engineer" class="role-apply">Share a README you’re proud of <i data-lucide="arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Role 7: Data Wrangler -->
+                    <div class="role-card" data-category="ai">
+                        <div class="role-header" onclick="toggleRoleDetails(this)">
+                            <i data-lucide="git-graph" class="role-icon"></i>
+                            <div class="role-info">
+                                <h4>Data Wrangler – Embeddings & ETL</h4>
+                                <p class="role-tagline">Turn messy documents into clean vectors.</p>
+                            </div>
+                            <i data-lucide="chevron-down" class="toggle-icon"></i>
+                        </div>
+                        <div class="role-details">
+                            <p><strong>What you’ll do:</strong> Build pipelines to chunk, embed, and index millions of pages. Clean dirty data. Experiment with chunking strategies and rerankers.</p>
+                            <p><strong>What we look for:</strong> You’re comfortable with Python, Pandas, and maybe Spark. You know what a vector is. You’re not afraid of 100GB JSON files.</p>
+                            <a href="mailto:team.dbc@consultant.com?subject=Data%20Wrangler" class="role-apply">Show a data cleaning script <i data-lucide="arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Role 8: Technical Problem Solver -->
+                    <div class="role-card" data-category="business">
+                        <div class="role-header" onclick="toggleRoleDetails(this)">
+                            <i data-lucide="users" class="role-icon"></i>
+                            <div class="role-info">
+                                <h4>Technical Problem Solver (Client‑Facing)</h4>
+                                <p class="role-tagline">Understand client needs, translate to engineering, help close deals.</p>
+                            </div>
+                            <i data-lucide="chevron-down" class="toggle-icon"></i>
+                        </div>
+                        <div class="role-details">
+                            <p><strong>What you’ll do:</strong> Talk to enterprise clients about GPU hosting, fine‑tuning, and SLAs. Work with engineers to scope projects. Write proposals that don’t suck.</p>
+                            <p><strong>What we look for:</strong> You have a technical background (you’ve coded before) but also love talking to people. You can explain what a TPU is to a non‑technical VP. You’re organised and honest.</p>
+                            <a href="mailto:team.dbc@consultant.com?subject=Technical%20Problem%20Solver" class="role-apply">Send a 2‑min Loom of you explaining something <i data-lucide="arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Role 9: Full‑Stack Generalist -->
+                    <div class="role-card" data-category="dev">
+                        <div class="role-header" onclick="toggleRoleDetails(this)">
+                            <i data-lucide="layers" class="role-icon"></i>
+                            <div class="role-info">
+                                <h4>Full‑Stack Generalist – From DB to UI</h4>
+                                <p class="role-tagline">Build features, fix bugs, ship fast.</p>
+                            </div>
+                            <i data-lucide="chevron-down" class="toggle-icon"></i>
+                        </div>
+                        <div class="role-details">
+                            <p><strong>What you’ll do:</strong> Work across the stack – React, Node/Python, Postgres, Redis, maybe some LLM integration. You’ll own features from idea to deployment.</p>
+                            <p><strong>What we look for:</strong> You have a few side projects that actually work. You’re not afraid to touch CSS, SQL, or bash scripts. You like moving fast and learning on the job.</p>
+                            <a href="mailto:team.dbc@consultant.com?subject=Full%20Stack%20Generalist" class="role-apply">Share your GitHub / GitLab <i data-lucide="arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Role 10: Creative Technologist -->
+                    <div class="role-card" data-category="ai">
+                        <div class="role-header" onclick="toggleRoleDetails(this)">
+                            <i data-lucide="wand" class="role-icon"></i>
+                            <div class="role-info">
+                                <h4>Creative Technologist – AI Playground Builder</h4>
+                                <p class="role-tagline">Build demos, prototypes, and unexpected applications.</p>
+                            </div>
+                            <i data-lucide="chevron-down" class="toggle-icon"></i>
+                        </div>
+                        <div class="role-details">
+                            <p><strong>What you’ll do:</strong> Rapidly prototype new AI features – voice interfaces, image generation, agents that browse the web. Break things, then show us what you learned.</p>
+                            <p><strong>What we look for:</strong> You have a Replicate or Hugging Face account with weird models. You’ve built a bot that does something useless but fun. You’re curious above all.</p>
+                            <a href="mailto:team.dbc@consultant.com?subject=Creative%20Technologist" class="role-apply">Show your craziest demo <i data-lucide="arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Business & Culture -->
+            <div class="careers-col">
+                <h3 class="careers-col-title"><i data-lucide="handshake"></i> Business with Us</h3>
+                <div class="business-card">
+                    <p><i data-lucide="check-circle" style="width: 18px;"></i> <strong>Strategic Partnerships</strong> – Co‑develop AI solutions</p>
+                    <p><i data-lucide="check-circle"></i> <strong>Investment Opportunities</strong> – Join our growth journey</p>
+                    <p><i data-lucide="check-circle"></i> <strong>White‑label AI</strong> – Custom models for enterprises</p>
+                    <p><i data-lucide="check-circle"></i> <strong>Research Collaborations</strong> – Academic & industry</p>
+                </div>
+
+                <h3 class="careers-col-title" style="margin-top: 2rem;"><i data-lucide="star"></i> Why DBC?</h3>
+                <div class="business-card">
+                    <p><i data-lucide="rocket"></i> Work on cutting‑edge AI with real‑world impact</p>
+                    <p><i data-lucide="users"></i> Flat hierarchy, rapid learning, mentorship</p>
+                    <p><i data-lucide="map-pin"></i> Narwana HQ + remote/hybrid options</p>
+                    <p><i data-lucide="trending-up"></i> Competitive compensation + equity</p>
+                </div>
+
+                <!-- Quick connect CTA -->
+                <div class="quick-connect">
+                    <p><strong>Ready to build the future?</strong></p>
+                    <a href="mailto:vidhi.sharma@contractor.com" class="connect-btn"><i data-lucide="send"></i> vidhi.sharma@contractor.com</a>
+                    <a href="mailto:team.dbc@consultant.com" class="connect-btn"><i data-lucide="handshake"></i> team.dbc@consultant.com</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer note -->
+        <div class="careers-footer">
+            <p>Or reach out via <a href="#" onclick="closeModal('careers-modal'); showContactModal()">WhatsApp / Telegram</a> for a quick chat.</p>
+        </div>
+    </div>
+</div>
