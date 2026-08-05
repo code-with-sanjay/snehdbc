@@ -1,0 +1,47 @@
+/* css/animations.css */
+
+/* 1. Entire message container fades in softly */
+.fade-in {
+  animation: messageFadeIn 0.4s ease-out forwards;
+}
+
+@keyframes messageFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 2. The ChatGPT Blinking Typing Cursor */
+.is-streaming::after {
+  content: '▋';
+  display: inline-block;
+  margin-left: 4px;
+  color: var(--highlight);
+  animation: blinkCursor 0.8s infinite;
+  vertical-align: baseline;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* 3. Smooth Table Pop-in (Only animates AFTER streaming is done to prevent flicker) */
+.answer-content:not(.is-streaming) table {
+  animation: tablePop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes tablePop {
+  from { opacity: 0; transform: scale(0.98) translateY(5px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* 4. Beautiful Code Block Glide-in */
+.answer-content:not(.is-streaming) pre {
+  animation: codeGlide 0.5s ease-out forwards;
+}
+
+@keyframes codeGlide {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+

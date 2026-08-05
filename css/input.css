@@ -1,0 +1,694 @@
+
+
+
+/* ============================================================
+   INPUT CONTAINER – always full width, no pill toggle
+   ============================================================ */
+
+.input-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+  padding: 0.25rem 0.25rem calc(0.25rem + env(safe-area-inset-bottom));
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+/* — The input wrapper – always expanded — */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  transform: translateY(-4px) translateZ(0);
+  border-radius: 24px;
+  padding: 5px 6px 6px 6px;
+  
+  background: rgba(var(--input-bg-rgb), 0.92);
+  box-shadow: 0 -4px 26px rgba(0, 0, 0, 0.12), 0 -1px 4px rgba(0, 0, 0, 0.08);
+  border: 0.3px solid var(--input-border-color);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: auto;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-radius 0.2s ease;
+  will-change: transform;
+}
+
+/* ============================================================
+   TEXT INPUT – auto‑grow via JS (height controlled solely by JS)
+   ============================================================ */
+
+.text-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 16px !important;
+  line-height: 1.3;
+  padding: 7px 0 7px 8px;
+  margin-right: 8px;
+  color: var(--text-primary);
+  max-height: 180px;
+  min-height: 38px;        /* floor height */
+  /* height: 38px;  ← REMOVED – height set by JS only */
+  resize: none;
+  font-family: inherit;
+  box-sizing: border-box;
+  overflow-y: auto;
+  /* Remove transition to avoid lag when resetting */
+  transition: none;
+}
+
+/* ============================================================
+   ACTIONS ROW – always visible
+   ============================================================ */
+/* ============================================================
+   UNIFORM ACTION BUTTONS – ALL SAME HEIGHT & ALIGNMENT
+   ============================================================ */
+
+/* ── All buttons in the input row ── */
+.action-btn-input,
+.search-toggle-btn,
+.model-capsule,
+.send-button {
+  box-sizing: border-box;           /* critical: border & padding don't add to height */
+  display: inline-flex;             /* ensures perfect centering of icons */
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  /* uniform height */
+  height: 36px;                     /* pick your preferred height – consistent */
+  line-height: 1;                  /* prevents extra vertical space from text */
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ── Circular buttons (upload, search) ── */
+.action-btn-input,
+.search-toggle-btn {
+  width: 34px;                     /* same as height → perfect circle */
+  border-radius: 50%;
+  color: var(--text-tertiary);
+}
+
+.action-btn-input:hover,
+.search-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-tertiary);
+}
+[data-theme="dark"] .action-btn-input:hover,
+[data-theme="dark"] .search-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+
+
+/* Active state for the web search toggle (globe button) */
+.search-toggle-btn.active {
+  background: var(--buttonactive) !important;
+  color: #000000 !important;
+ 
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-theme="dark"] .search-toggle-btn.active {
+  background: var(--buttonactive) !important;
+  color: #ffffff !important;
+  }
+
+.seaech-toggle-btn.active:hover {
+  color : midnightblue !important ;
+}
+
+/* ── Model capsule (pill) ── */
+.model-capsule {
+  
+  
+                        /* width determined by content */
+  padding: 0 14px;                  /* horizontal padding only */
+            /* pill shape */
+  background: var(--inputboxmodel) !important;
+/*  border: 0.3px solid var(--input-border-color) !important;*/
+  color: var(--text-secondary) !important;
+  gap: 6px;
+}
+.model-capsule {
+  width: auto !important;
+  min-width: 80px !important;
+  max-width: none !important;
+  overflow: visible !important;
+  border-radius: 50px !important;
+}
+
+/* Give the plus & search icons the same background as the model capsule */
+.action-btn-input,
+.search-toggle-btn {
+  background: var(--inputboxmodel);
+}
+
+
+
+
+
+.model-capsule:hover {
+  background: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+}
+
+
+
+.action-btn-input,
+.search-toggle-btn {
+  width: 34px;
+  height: 34px;          /* already set */
+  border-radius: 50%;
+  min-width: 34px;       /* prevent shrinking */
+  max-width: 34px;       /* prevent expanding */
+  overflow: hidden;      /* clip any oversized content */
+  flex-shrink: 0;        /* already present, but ensure it's there */
+}
+
+
+
+/* ── Send button (pill) ── */
+.send-button {
+  width: 74px;                      /* slightly wider than tall → pill */
+  border-radius: 29px;              /* perfect pill (half of height) */
+  background: var(--primary);
+  color: #ffffff;
+  padding: 0;                       /* icon will be centered via flex */
+}
+
+
+.send-button.loading {
+  width: 44px;           /* square-ish */
+  height: 44px;          /* equal to width */
+  border-radius: 50px;   /* slightly rounded corners */
+}
+
+
+.send-button:disabled {
+  background: var(--text-tertiary);
+  opacity: 0.3;
+  transform: scale(0.9);
+}
+.send-button:active:not(:disabled) {
+  transform: scale(0.85);
+}
+
+/* ── Ensures the container aligns everything perfectly ── */
+.input-actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;              /* vertical alignment */
+  width: 100%;
+  margin-top: 7px;                  /* adjust gap from text */
+  gap: 0;                          /* we use the gap inside .actions-left */
+}
+
+.actions-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;                         /* space between the left buttons */
+}
+
+.actions-right {
+  display: flex;
+  align-items: center;
+}
+
+/* ── Also reset any inherited padding/margin on the buttons ── */
+.action-btn-input i,
+.search-toggle-btn i,
+.model-capsule i,
+.send-button svg,
+.send-button i {
+  pointer-events: none;             /* prevent clicks on icons from interfering */
+}
+
+/* ============================================================
+   GOOGLE TRANSLATE HIDING & LANGUAGE CONTROLS
+   ============================================================ */
+/* (keep your existing Google Translate hiding and language menu styles – they stay unchanged) */
+
+/* ============================================================
+   GOOGLE TRANSLATE – COMPLETE BRANDING REMOVAL
+   ============================================================ */
+
+iframe.goog-te-banner-frame,
+iframe.skiptranslate,
+iframe[class*="goog-te"],
+.goog-te-banner-frame,
+.goog-te-banner,
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+html,
+body {
+  top: 0px !important;
+  margin-top: 0px !important;
+  position: static !important;
+}
+
+#google_translate_element,
+.goog-te-gadget,
+.goog-te-logo,
+.goog-te-badge,
+.goog-te-float-badge,
+.goog-te-gadget-icon,
+.goog-te-menu-value,
+.goog-te-gadget-simple,
+.goog-te-gadget-simple > *,
+div[class*="goog-te"],
+span[class*="goog-te"],
+img[class*="goog-te"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+  clip: rect(0 0 0 0) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+/* ============================================================
+   FLOATING LANGUAGE CONTROLS
+   ============================================================ */
+
+.language-controls {
+  position: absolute;
+  top: -44px;
+  right: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 10;
+}
+
+.language-toggle-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--text-secondary, #606770);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.language-toggle-btn:hover {
+  background: transparent !important;
+  color: var(--text-secondary, #606770);
+  transform: none;
+}
+
+.language-toggle-btn.active {
+  color: var(--text-secondary, #606770);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .language-toggle-btn.active {
+  color: var(--text-secondary, #606770);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.language-menu {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  background: var(--bg-primary, #ffffff);
+  border: 1px solid var(--input-border-color, rgba(0, 0, 0, 0.1));
+  border-radius: var(--radius-md, 16px);
+  box-shadow: var(--shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.12));
+  padding: 8px 0;
+  width: 210px;
+  max-height: 220px;
+  overflow-y: auto;
+  display: none;
+  flex-direction: column;
+  animation: slideUp 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto;
+  z-index: 10002;
+}
+
+[data-theme="dark"] .language-menu {
+  background: #1e1e1e !important;
+  border-color: #333 !important;
+}
+
+.language-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-tertiary, #8e8e93);
+  letter-spacing: 0.6px;
+  border-bottom: 1px solid var(--input-border-color, rgba(0, 0, 0, 0.1));
+}
+
+.language-options-wrapper {
+  max-height: 180px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.language-options-wrapper::-webkit-scrollbar {
+  width: 4px;
+}
+.language-options-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+.language-options-wrapper::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary, #8e8e93);
+  border-radius: 4px;
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  color: var(--text-primary, #1c1c1e);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.language-option:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .language-option:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.language-option.active-lang {
+  font-weight: 700;
+  color: var(--primary, #0B57CF) !important;
+}
+
+[data-theme="dark"] .language-option.active-lang {
+  color: #5e9fff !important;
+}
+
+/* — Info button inside language menu */
+.lang-legal-icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary, #8e8e93);
+  cursor: pointer;
+  padding: 0px 0px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  border-radius: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.lang-legal-icon-btn:hover {
+  color: var(--primary, #0B57CF);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .lang-legal-icon-btn:hover {
+  color: #5e9fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.lang-legal-icon-btn:focus-visible {
+  outline: 2px solid var(--primary, #0B57CF);
+  outline-offset: 2px;
+}
+
+
+
+/* ============================================================
+   MODEL SELECTOR MENU (mirrors language menu)
+   ============================================================ */
+
+.model-controls {
+  position: absolute;
+  top: -44px;
+  left: 4px; /* align with the model capsule */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 10;
+}
+
+.model-menu {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  background: var(--bg-primary, #ffffff);
+  border: 1px solid var(--input-border-color, rgba(0, 0, 0, 0.1));
+  border-radius: var(--radius-md, 16px);
+  box-shadow: var(--shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.12));
+  padding: 8px 0;
+  width: 210px;
+  max-height: 220px;
+  overflow-y: auto;
+  display: none;
+  flex-direction: column;
+  animation: slideUp 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto;
+  z-index: 10002;
+}
+
+[data-theme="dark"] .model-menu {
+  background: #1e1e1e !important;
+  border-color: #333 !important;
+}
+
+.model-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-tertiary, #8e8e93);
+  letter-spacing: 0.6px;
+  border-bottom: 1px solid var(--input-border-color, rgba(0, 0, 0, 0.1));
+}
+
+.model-options-wrapper {
+  max-height: 180px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.model-options-wrapper::-webkit-scrollbar {
+  width: 4px;
+}
+.model-options-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+.model-options-wrapper::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary, #8e8e93);
+  border-radius: 4px;
+}
+
+.model-option {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  color: var(--text-primary, #1c1c1e);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  gap: 10px;
+}
+
+.model-option:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .model-option:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.model-option.active-model {
+  font-weight: 700;
+  color: var(--primary, #0B57CF) !important;
+}
+
+[data-theme="dark"] .model-option.active-model {
+  color: #5e9fff !important;
+}
+
+.model-option .model-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.model-option .model-label {
+  flex: 1;
+}
+.model-option .model-badge {
+  font-size: 0.65rem;
+  background: var(--bg-tertiary);
+  padding: 2px 8px;
+  border-radius: 12px;
+  color: var(--text-secondary);
+}
+
+
+
+/* ============================================================
+   MODEL SELECTOR MENU (matches language menu)
+   ============================================================ */
+
+.input-wrapper {
+  overflow: visible !important; /* allow dropdown to overflow */
+}
+
+.model-menu {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  background: var(--bg-primary, #ffffff);
+  border: 1px solid var(--input-border-color, rgba(0, 0, 0, 0.1));
+  border-radius: var(--radius-md, 16px);
+  box-shadow: var(--shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.12));
+  padding: 8px 0;
+  width: 210px;
+  max-height: 220px;
+  overflow-y: auto;
+  display: none;
+  flex-direction: column;
+  animation: slideUp 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto;
+  z-index: 10002;
+}
+
+[data-theme="dark"] .model-menu {
+  background: #1e1e1e !important;
+  border-color: #333 !important;
+}
+
+.model-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-tertiary, #8e8e93);
+  letter-spacing: 0.6px;
+  border-bottom: 1px solid var(--input-border-color, rgba(0, 0, 0, 0.1));
+}
+
+.model-options-wrapper {
+  max-height: 180px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.model-options-wrapper::-webkit-scrollbar {
+  width: 4px;
+}
+.model-options-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+.model-options-wrapper::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary, #8e8e93);
+  border-radius: 4px;
+}
+
+.model-option {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  color: var(--text-primary, #1c1c1e);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  gap: 10px;
+  border-left: 3px solid transparent; /* for active indicator */
+}
+
+.model-option:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .model-option:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.model-option.active-model {
+  font-weight: 700;
+  border-left-color: var(--primary, #0B57CF);
+  background: rgba(11, 87, 207, 0.05);
+  color: var(--primary, #0B57CF);
+}
+
+[data-theme="dark"] .model-option.active-model {
+  border-left-color: #5e9fff;
+  background: rgba(94, 159, 255, 0.1);
+  color: #5e9fff;
+}
+
+.model-option .model-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.model-option .model-label {
+  flex: 1;
+}
+.model-option .model-badge {
+  font-size: 0.65rem;
+  background: var(--bg-tertiary);
+  padding: 2px 8px;
+  border-radius: 12px;
+  color: var(--text-secondary);
+}
+
+
+
+

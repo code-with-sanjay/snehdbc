@@ -1,0 +1,21 @@
+/* ── Streaming/rendering block nodes ── */
+.sneh-block-node {
+  contain: layout;
+  margin-bottom: 0.9rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.answer-content {
+  transition: transform 0.1s ease-out;
+  will-change: scroll-position;
+}
+
+/* ── Code block inside streaming state ── */
+.is-streaming pre code {
+  white-space: pre-wrap;
+  background: transparent;
+  border: none;
+  font-family: monospace;
+}

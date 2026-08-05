@@ -1,0 +1,237 @@
+
+/* ============================================================
+   SNEH AI — MULTI-FACTOR ADAPTIVE TABLE ARCHITECTURE
+   (Extracted from chat.css & markdown.css)
+   ============================================================ */
+
+/* ── Layer 5: Responsive Wrapper Container ── */
+.message-assistant .message-bubble .table-wrapper {
+  width: 100% !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  margin: 1.25rem 0 !important;
+  border-radius: var(--radius-md, 12px) !important;
+  border: 1px solid var(--input-border-color) !important;
+  background: var(--table-bg1) !important;
+  box-shadow: var(--shadow-sm) !important;
+  display: block !important; /* Wrapper is the block container */
+}
+
+/* ── Layer 1: Natural Wrapping Table Base ── */
+.message-assistant .message-bubble .table-wrapper table {
+  display: table !important; /* Forces layout calculations */
+  width: 100% !important;
+  max-width: none !important;
+  border-collapse: collapse !important;
+  margin: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  white-space: normal !important; /* Fixes chat.css nowrap bug */
+}
+
+/* ── Cells & Adaptive Word Wrapping ── */
+.message-assistant .message-bubble .table-wrapper th,
+.message-assistant .message-bubble .table-wrapper td {
+  padding: 12px 16px !important; /* Desktop spacing default */
+  vertical-align: top !important;
+  border: none !important;
+  border-bottom: 1px solid var(--input-border-color) !important;
+  color: var(--text-primary) !important;
+  background: transparent !important;
+  
+  /* Desktop-Friendly Fluid Constraints */
+  max-width: clamp(140px, 30vw, 360px) !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+  white-space: normal !important;
+  hyphens: auto !important;
+}
+
+/* ── Responsive Spacing: Compact Mobile Padding ── */
+@media (max-width: 600px) {
+  .message-assistant .message-bubble .table-wrapper th,
+  .message-assistant .message-bubble .table-wrapper td {
+    padding: 8px 10px !important;
+  }
+}
+
+/* ── Sticky Headers ── */
+.message-assistant .message-bubble .table-wrapper thead th {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  background: var(--bg-tertiary) !important;
+  font-weight: 600 !important;
+  color: var(--text-secondary) !important;
+  border-bottom: 2px solid var(--primary) !important;
+}
+
+/* Safe Sticky Headers on Mobile/Tablet */
+@media (max-width: 768px) {
+  .message-assistant .message-bubble .table-wrapper thead th {
+    position: static !important; /* Prevents sticky glitches in WebViews */
+  }
+}
+
+/* ── Alignment Overrides ── */
+.table-wrapper .col-right { text-align: right !important; }
+.table-wrapper .col-center { text-align: center !important; }
+.table-wrapper .col-left { text-align: left !important; }
+
+/* ── Outlier Cell Forced Vertical Growth ── */
+.table-wrapper td.table-outlier-cell {
+  max-width: 180px !important;
+  font-size: 0.92em !important;
+  line-height: 1.4 !important;
+  color: var(--text-secondary) !important;
+}
+
+/* ── Prose Collapse Assets ── */
+.table-wrapper .prose-short { display: inline !important; }
+.table-wrapper .prose-full { display: none; }
+.table-wrapper .prose-toggle {
+  display: inline-block !important;
+  background: none !important;
+  border: none !important;
+  color: var(--primary, #0B57CF) !important;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
+  padding: 0 4px !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+}
+.table-wrapper .prose-toggle:hover {
+  text-decoration: underline !important;
+}
+
+/* ── URL Compaction Link styles ── */
+.table-wrapper .table-compact-url {
+  color: var(--primary, #0B57CF) !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  transition: opacity 0.2s ease !important;
+}
+.table-wrapper .table-compact-url:hover {
+  text-decoration: underline !important;
+  opacity: 0.85 !important;
+}
+
+/* ── Zebra Stripes & Subtle Hover State ── */
+.message-assistant .message-bubble .table-wrapper tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.015) !important;
+}
+[data-theme="dark"] .message-assistant .message-bubble .table-wrapper tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.015) !important;
+}
+
+@media (min-width: 768px) {
+  .message-assistant .message-bubble .table-wrapper tr:hover {
+    background: rgba(11, 87, 207, 0.02) !important;
+  }
+}
+
+/* ── Card Conversion (Viewports under 600px) ── */
+@media (max-width: 600px) {
+  .message-assistant .message-bubble .table-wrapper[data-mode="card-conversion"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .message-assistant .message-bubble .table-wrapper[data-mode="card-conversion"] table,
+  .message-assistant .message-bubble .table-wrapper[data-mode="card-conversion"] thead,
+  .message-assistant .message-bubble .table-wrapper[data-mode="card-conversion"] tbody,
+  .message-assistant .message-bubble .table-wrapper[data-mode="card-conversion"] tr,
+  .message-assistant .message-bubble .table-wrapper[data-mode="card-conversion"] th,
+  .message-assistant .message-bubble .table-wrapper[data-mode="card-conversion"] td {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .message-assistant .message-bubble .table-wrapper[data-mode="card-conversion"] thead {
+    display: none !important;
+  }
+
+  .message-assistant .message-bubble .table-wrapper[data-mode="card-conversion"] tr {
+    margin-bottom: 12px !important;
+    border: 1px solid var(--input-border-color) !important;
+    border-radius: var(--radius-md) !important;
+    background: var(--bg-primary) !important;
+    padding: 12px 14px !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+
+  .message-assistant .message-bubble .table-wrapper[data-mode="card-conversion"] td {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    padding: 8px 0 !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+    text-align: right !important;
+    font-size: 0.9rem !important;
+  }
+
+  [data-theme="dark"] .message-assistant .message-bubble .table-wrapper[data-mode="card-conversion"] td {
+    border-bottom-color: rgba(255, 255, 255, 0.05) !important;
+  }
+
+  .message-assistant .message-bubble .table-wrapper[data-mode="card-conversion"] td::before {
+    content: attr(data-label) !important;
+    font-weight: 600 !important;
+    color: var(--text-secondary) !important;
+    text-align: left !important;
+    margin-right: 20px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .message-assistant .message-bubble .table-wrapper[data-mode="card-conversion"] td:last-child {
+    border-bottom: none !important;
+  }
+}
+
+/* ── Standard chat.css table rules (moved here) ── */
+.message-assistant .message-bubble table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  background: var(--input-bg1);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--input-border-color);
+}
+
+.message-assistant .message-bubble th,
+.message-assistant .message-bubble td {
+  border: 1px solid var(--input-border-color);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.message-assistant .message-bubble th {
+  background: var(--bg-tertiary);
+  font-weight: 700;
+}
+
+.message-assistant .message-bubble tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="dark"] .message-assistant .message-bubble tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ── Hide scrollbars for tables and pre inside assistant messages ── */
+.message-assistant .message-bubble table,
+.message-assistant .message-bubble pre {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.message-assistant .message-bubble table::-webkit-scrollbar,
+.message-assistant .message-bubble pre::-webkit-scrollbar {
+  display: none;
+}

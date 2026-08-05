@@ -1,0 +1,145 @@
+.header {
+  /* 1. Make it float over the app */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 90; /* High enough to stay over text, but below modals */
+  
+  /* 2. Transparent Style – Leaves the fade to the mask-image */
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  
+  /* 3. Spacing and Alignment */
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.header-brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  text-align: center;
+  pointer-events: none; /* allows clicking through to the hamburger if needed */
+}
+
+.logo-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  color: var(--txt1);
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto; /* pushes to the right */
+}
+
+.incognito-btn,
+.new-chat-btn,
+.menu-toggle,
+.theme-toggle-header {
+  width: 2.85rem;
+  height: 2.85rem;
+  background: var(--inputboxmodel);
+  backdrop-filter: blur(8px);
+  border: 0.3px solid var(--input-border-color);
+
+    border-radius: 28px;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--text-primary);
+  transition: all 0.6s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.incognito-btn:hover,
+.new-chat-btn:hover {
+  background: var(--input-bg2);
+}
+
+/* New Chat button hidden until first user message */
+.new-chat-btn {
+  display: none;
+}
+
+
+/* ===== INCognito banner styles ===== */
+.incognito-banner {
+  text-align: center;
+  font-size: 0.75rem;
+  padding: 0.25rem 1rem;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  margin: 0 auto 0.5rem auto;
+  width: fit-content;
+  backdrop-filter: blur(4px);
+  color: var(--text-secondary);
+}
+
+/* Active chat incognito banner (shown during an incognito conversation) */
+.incognito-banner.active-banner {
+  background: rgba(52, 199, 89, 0.1);
+  border: 1px solid rgba(52, 199, 89, 0.3);
+  color: var(--secondary);
+  margin: 1rem auto 0.5rem auto;
+  backdrop-filter: blur(4px);
+}
+
+[data-theme="dark"] .incognito-banner {
+  background: rgba(255, 255, 255, 0.1);
+}
+[data-theme="dark"] .incognito-banner.active-banner {
+  background: rgba(52, 199, 89, 0.2);
+  border-color: rgba(52, 199, 89, 0.5);
+}
+
+
+
+
+
+/* Ultimate capsule stability */
+.header-actions-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  background: var(--inputboxmodel);
+  backdrop-filter: blur(8px);
+  border-radius: 28px;
+  padding: 0 4px;
+  isolation: isolate;
+  will-change: transform; /* optional, prevents flicker */
+  border: 0.3px solid var(--input-border-color);
+
+}
+
+/* Override ALL button styles inside the capsule */
+.header-actions-group button,
+.header-actions-group .theme-toggle-header,
+.header-actions-group .new-chat-btn {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  border-radius: !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: 2.45rem;
+  height: 2.85rem;
+  margin: 0;
+  padding: 0;
+  transition: background 0.2s ease;
+}
+
+/* Hover effect inside capsule (optional) */
+.header-actions-group button:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
