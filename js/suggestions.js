@@ -30,7 +30,7 @@ export async function getWelcomePrompts() {
         const now = Date.now();
         const cachedTime = localStorage.getItem('sneh_welcome_time');
         const cachedPrompts = localStorage.getItem('sneh_welcome_prompts');
-        const SIX_HOURS_MS = 21600000;
+        const SIX_HOURS_MS = 1160000;
 
         if (cachedTime && cachedPrompts && (now - parseInt(cachedTime)) < SIX_HOURS_MS) {
             return JSON.parse(cachedPrompts);
