@@ -103,7 +103,7 @@ export async function getFollowUpQuestions(currentMessages, signal) {
                 headers: { "Content-Type": "application/json" },
                 signal: signal,
                 body: JSON.stringify({
-                    model: "llama-3.3-70b-versatile",
+                    model: "openai/gpt-oss-120b",
                     messages: [
                         { role: "system", content: `Based on this conversation, suggest 3 highly relevant, short follow-up questions (3 to 10 words) the user could ask next. Return ONLY a valid JSON array of 3 strings.` },
                         ...recentContext
