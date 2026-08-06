@@ -50,6 +50,7 @@ const APP_SHELL = [
   '/js/ui-dom.js',
   '/js/ui-format.js',
   '/js/table-enhancer.js',
+  '/js/sneh-renderer.js',
   '/js/ui-components.js',
   '/js/ui-messages.js',
   '/js/chat-core.js',
