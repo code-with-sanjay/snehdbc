@@ -8,7 +8,7 @@
   publish = "."
 
 [build.environment]
-  NODE_VERSION = "20.x"
+  NODE_VERSION = "24"
   SECRETS_SCAN_ENABLED = "true"
 
 # Explicitly declare Functions Directory to prevent build ambiguity
