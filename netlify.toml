@@ -1,32 +1,150 @@
+# ============================================================
+# Snèh AI — Production Netlify Configuration
+# Publisher: DBC Technologies (Narwana, Haryana)
+# Site: https://snehaidbc.netlify.app/
+# ============================================================
+
 [build]
   publish = "."
 
-# Enforce HTTPS and clean routing redirects
-[[redirects]]
-  from = "http://snehaidbc.netlify.app/*"
-  to = "https://snehaidbc.netlify.app/:splat"
-  status = 301
-  force = true
+[build.environment]
+  NODE_VERSION = "20.x"
+  SECRETS_SCAN_ENABLED = "true"
 
-# Cache static assets long-term for Core Web Vitals performance
+# Explicitly declare Functions Directory to prevent build ambiguity
+[functions]
+  directory = "netlify/functions"
+
+# ============================================================
+# 1. ROUTING, CLEAN URLS & SPA FALLBACKS
+# ============================================================
+
+[processing]
+  skip_processing = false
+
+[processing.html]
+  pretty_urls = true
+
+[processing.images]
+  compress = true
+
+# SPA Fallback: Serve physical static subfolders first (/about/, /docs/, etc.), 
+# fall back to /index.html ONLY if no physical file matches.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+
+# ============================================================
+# 2. CACHE CONTROL & CORE WEB VITALS OPTIMIZATION
+# ============================================================
+
+# Root Document Route
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Netlify Edge Functions & API Endpoints — NEVER CACHE API RESPONSES
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, proxy-revalidate"
+
+# PWA Service Worker — MUST NEVER BE CACHED PERMANENTLY
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Service-Worker-Allowed = "/"
+
+# PWA Web Manifest & App Shortcuts
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Content-Type = "application/manifest+json; charset=utf-8"
+
+# AI Crawlers & Search Engine Metadata Indexes
+[[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+    Content-Type = "text/plain; charset=utf-8"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+    Content-Type = "application/xml; charset=utf-8"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+    Content-Type = "text/plain; charset=utf-8"
+
+# HTML Documents (Must revalidate on deploy to get immediate updates)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Non-fingerprinted Assets (js/main.js, docs.css, css/base.css)
+# Must revalidate so users receive new updates instantly on deployment
 [[headers]]
   for = "/css/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/docs.css"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/js/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
+# Immutable Media Assets (Images & Screenshots)
 [[headers]]
   for = "/icons/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
+  for = "/screenshots/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ============================================================
+# 3. ENTERPRISE SECURITY & GOOGLE OAUTH HEADERS
+# ============================================================
+
+[[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "SAMEORIGIN"
+    # Enforce strict HTTPS encryption for 1 year
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    
+    # Prevent MIME-type sniffing
     X-Content-Type-Options = "nosniff"
+    
+    # Prevent Clickjacking
+    X-Frame-Options = "SAMEORIGIN"
+    
+    # Referrer Privacy Protection
     Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Restrict unneeded browser hardware features
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), display-capture=()"
+    
+    # Allow Google GIS Authentication Popups without CORS lockups
+    Cross-Origin-Opener-Policy = "same-origin-allow-popups"
