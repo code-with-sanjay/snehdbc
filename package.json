@@ -1,0 +1,11 @@
+{
+  "name": "sneh-ai",
+  "version": "5.2.25",
+  "description": "Snèh AI - Private, High-Speed AI Assistant",
+  "type": "module",
+  "main": "js/main.js",
+  "scripts": {
+    "build": "echo 'No build step required for static assets'"
+  },
+  "dependencies": {}
+}
