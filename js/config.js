@@ -1,6 +1,6 @@
 // js/config.js
 
-export const GOOGLE_CLIENT_ID = "562512504292-89u6rob1pr7k23fk8svetd28vn9m50k8.apps.googleusercontent.com";
+export const GOOGLE_CLIENT_ID = "521850364838-9j854bfdhor1p75mvdkbq8j09g662rc5.apps.googleusercontent.com";
 
 export const GROQ_MODELS = {
   DEFAULT: "openai/gpt-oss-120b",      // Flagship reasoning & logic
